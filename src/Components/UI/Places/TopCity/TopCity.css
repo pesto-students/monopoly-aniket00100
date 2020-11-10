@@ -1,0 +1,16 @@
+.place {
+  min-width: 111px;
+  height: 204px;
+  border: 2px solid black;
+}
+
+.top-city {
+  height: 40px;
+  width: 100%;
+  background-color: red;
+  border-top: 3px solid black;
+}
+
+.placeholder {
+  height: 160px;
+}

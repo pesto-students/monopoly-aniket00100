@@ -1,0 +1,16 @@
+.horizontal-place-2 {
+  height: 104px;
+  width: 204px;
+  border: 2px solid black;
+  border-color: black;
+  border-left: 3px solid black;
+}
+
+.right-city {
+  width: 40px;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: orange;
+  overflow-y: hidden;
+}

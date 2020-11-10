@@ -1,0 +1,11 @@
+.place {
+  min-width: 111px;
+  height: 204px;
+  border: 2px solid black;
+}
+
+.city {
+  height: 40px;
+  width: 100%;
+  background-color: red;
+}

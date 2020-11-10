@@ -1,0 +1,15 @@
+.horizontal-place {
+  height: 104px;
+  width: 204px;
+  border: 2px solid black;
+  border-color: black;
+  border-right: 3px solid black;
+}
+
+.left-city {
+  width: 40px;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: orange;
+}
