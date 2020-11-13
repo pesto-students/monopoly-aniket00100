@@ -1,0 +1,14 @@
+.bottom-place {
+  min-width: 111px;
+  height: 204px;
+  border: 2px solid black;
+}
+
+.player-bottom-place-color {
+  height: 12px;
+  border-top: 2px dashed gray;
+}
+
+.bottom-place-content {
+  height: 188px;
+}

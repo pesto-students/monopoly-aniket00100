@@ -7,10 +7,15 @@
 .top-city {
   height: 40px;
   width: 100%;
-  background-color: red;
+  /* background-color: red; */
   border-top: 3px solid black;
 }
 
-.placeholder {
-  height: 160px;
+.top-city-content {
+  height: 148px;
+}
+
+.player-top-color {
+  height: 12px;
+  border-bottom: 2px dashed gray;
 }

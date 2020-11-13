@@ -1,0 +1,5 @@
+.player-left-color {
+  width: 12px;
+  height: 100px;
+  border-right: 2px dashed gray;
+}

@@ -1,11 +1,39 @@
-.place {
+.bottom-city-box {
+  height: 40px;
+  width: 100%;
+  border-bottom: 2px solid black;
+}
+
+.bottom-city {
   min-width: 111px;
   height: 204px;
   border: 2px solid black;
 }
 
-.city {
-  height: 40px;
-  width: 100%;
-  background-color: red;
+.player-bottom-color {
+  height: 12px;
+  border-top: 2px dashed black;
+}
+
+.bottom-city-content {
+  height: 148px;
+}
+
+.bottom-city-content p {
+  max-width: 75px;
+  margin: auto;
+  overflow-wrap: break-word;
+  height: 74px;
+  text-transform: uppercase;
+}
+
+.bottom-city-construction {
+  height: 45px;
+}
+
+.player-box-bottom-city {
+  height: 20px;
+  width: 20px;
+  margin: 2px;
+  background-color: royalblue;
 }
