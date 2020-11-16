@@ -1,5 +1,20 @@
-.place {
+.top-place {
   min-width: 111px;
   height: 204px;
   border: 2px solid black;
+}
+
+.top-place-image {
+  height: 100px;
+  margin-top: 10px;
+}
+
+.top-place-name {
+  width: 80px;
+  height: 40px;
+  overflow-wrap: break-word;
+  text-transform: uppercase;
+  margin: auto;
+  font-size: 0.8rem;
+  transform: rotate(180deg);
 }

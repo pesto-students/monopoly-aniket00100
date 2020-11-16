@@ -10,5 +10,19 @@
 }
 
 .bottom-place-content {
-  height: 188px;
+  height: 183px;
+}
+
+.bottom-place-content p {
+  max-width: 90px;
+  margin: auto;
+  overflow-wrap: break-word;
+  height: 40px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
+.bottom-place-image {
+  height: 114px;
 }

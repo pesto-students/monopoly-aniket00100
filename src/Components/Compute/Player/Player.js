@@ -1,6 +1,7 @@
 export default class Player {
-  constructor(name, startingCapital) {
+  constructor(name, color, startingCapital) {
     this.name = name;
+    this.color = color;
     this.properties = [];
     this.cash = startingCapital;
     this.mortgagedProperties = [];

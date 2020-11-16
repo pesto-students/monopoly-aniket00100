@@ -1,9 +1,8 @@
 import React from 'react';
 
-import './TopPlace.css';
-
-export default function TopPlace({ blockDetails }) {
-  const { name, currentPlayers } = blockDetails;
+import './TopLeftCornerBox.css';
+export default function TopLeftCornerBox({ blockDetails }) {
+  const { currentPlayers } = blockDetails;
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;
     return (
@@ -13,13 +12,11 @@ export default function TopPlace({ blockDetails }) {
     );
   });
   return (
-    <div className="top-place">
-      <div className="player-top-color"></div>
-      <div className="player-top-position">
+    <div className="corner-box">
+      <div className="tlc-player-position">
         <div className="d-flex">{playerBoxes}</div>
       </div>
-      <div className="top-place-image"></div>
-      <div className="top-place-name">{name}</div>
+      <div>Parking!</div>
     </div>
   );
 }
