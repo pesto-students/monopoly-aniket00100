@@ -3,7 +3,7 @@ import React from 'react';
 import './LeftPlace.css';
 
 export default function LeftPlace({ blockDetails }) {
-  const { name, currentPlayers } = blockDetails;
+  const { name, currentPlayers, owner } = blockDetails;
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;
     return (
@@ -17,7 +17,10 @@ export default function LeftPlace({ blockDetails }) {
   return (
     <div className="horizontal-place mr-auto">
       <div className="d-flex">
-        <div className="player-left-color"></div>
+        <div
+          className="player-left-color"
+          style={{ backgroundColor: owner ? owner.color : 'transparent' }}
+        ></div>
         <div className="player-left-position">
           <div className="p-boxes">{playerBoxes}</div>
         </div>

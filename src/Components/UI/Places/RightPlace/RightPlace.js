@@ -3,7 +3,7 @@ import React from 'react';
 import './RightPlace.css';
 
 export default function RightPlace({ blockDetails }) {
-  const { name, currentPlayers } = blockDetails;
+  const { name, currentPlayers, owner } = blockDetails;
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;
     return (
@@ -22,7 +22,10 @@ export default function RightPlace({ blockDetails }) {
         <div className="player-right-position">
           <div className="p-boxes">{playerBoxes}</div>
         </div>
-        <div className="ml-auto player-right-place-color"></div>
+        <div
+          className="ml-auto player-right-place-color"
+          style={{ backgroundColor: owner ? owner.color : 'transparent' }}
+        ></div>
       </div>
     </div>
   );

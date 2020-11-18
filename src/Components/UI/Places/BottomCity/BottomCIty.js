@@ -3,7 +3,7 @@ import React from 'react';
 import './BottomCity.css';
 
 export default function BottomCity({ blockDetails }) {
-  const { color, name, currentPlayers } = blockDetails;
+  const { color, name, currentPlayers, owner } = blockDetails;
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;
     return (
@@ -29,7 +29,10 @@ export default function BottomCity({ blockDetails }) {
           <div className="d-flex">{playerBoxes}</div>
         </div>
       </div>
-      <div className="player-bottom-color"></div>
+      <div
+        className="player-bottom-color"
+        style={{ backgroundColor: owner ? owner.color : 'transparent' }}
+      ></div>
     </div>
   );
 }

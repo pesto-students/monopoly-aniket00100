@@ -3,7 +3,7 @@ import React from 'react';
 import './TopPlace.css';
 
 export default function TopPlace({ blockDetails }) {
-  const { name, currentPlayers } = blockDetails;
+  const { name, currentPlayers, owner } = blockDetails;
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;
     return (
@@ -14,7 +14,10 @@ export default function TopPlace({ blockDetails }) {
   });
   return (
     <div className="top-place">
-      <div className="player-top-color"></div>
+      <div
+        className="player-top-color"
+        style={{ backgroundColor: owner ? owner.color : 'transparent' }}
+      ></div>
       <div className="player-top-position">
         <div className="d-flex">{playerBoxes}</div>
       </div>

@@ -3,7 +3,7 @@ import React from 'react';
 import './RightCity.css';
 
 export default function RightCity({ blockDetails }) {
-  const { color, name, currentPlayers } = blockDetails;
+  const { color, name, currentPlayers, owner } = blockDetails;
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;
     return (
@@ -23,7 +23,10 @@ export default function RightCity({ blockDetails }) {
         <div className="player-right-position">
           <div className="p-boxes">{playerBoxes}</div>
         </div>
-        <div className="player-right-color"></div>
+        <div
+          className="player-right-color"
+          style={{ backgroundColor: owner ? owner.color : 'transparent' }}
+        ></div>
       </div>
     </div>
   );
