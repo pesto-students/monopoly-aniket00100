@@ -1,0 +1,16 @@
+.board {
+  /* height: 1348px; */
+  width: 1404px;
+  /* border: 2px solid black; */
+  background-color: #cde6d0;
+}
+
+.main-div {
+  margin-bottom: 20px;
+}
+
+.corner-box {
+  width: 204px;
+  height: 204px;
+  border: 2px solid black;
+}
