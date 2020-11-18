@@ -17,7 +17,7 @@ import './BoardEl.css';
 class BoardEl extends React.Component {
   render() {
     return (
-      <div className="container main-div">
+      <div className="main-div">
         <div className="board">
           <div className="row">
             <div className="col-12">

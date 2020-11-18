@@ -7,11 +7,13 @@ import blocks from '../../../data/gameBlocks.json';
 import Player from '../Player/Player';
 import Dice from '../Dice/Dice';
 import Auction from '../AuctionBlock/Auction';
+import PlayerStats from '../PlayerStats/PlayerStats';
 
 const btnStyle = {
   margin: 'auto',
   fontSize: '2rem',
   marginTop: '50px',
+  marginBottom: '50px',
 };
 
 class Board extends React.Component {
@@ -49,11 +51,14 @@ class Board extends React.Component {
   }
 
   setNewProperties = () => {
+    let index = 0;
     this.gameBlocks.forEach((block) => {
       block.currentPlayers = [];
       block.owner = null;
       block.houseCount = 0;
       block.mortgaged = false;
+      block.index = index;
+      index += 1;
     });
   };
 
@@ -154,48 +159,54 @@ class Board extends React.Component {
 
   render() {
     // console.log(this.state.players);
-    const currentPlayerName = this.state.players[0].name;
+    const currentPlayer = this.state.players[0];
     // console.log(currentPlayerName);
     return (
-      <div>
+      <div className="d-flex">
         <BoardEl
           gameBlocks={this.state.gameBlocks}
           gameOn={this.state.gameOn}
         ></BoardEl>
         <div style={btnStyle}>
-          <button
-            onClick={this.rollDice}
-            disabled={this.state.currentPlayerPlayed || this.state.auctionOn}
-          >
-            Roll Dice
-          </button>
-          <button
-            onClick={this.buyProperty}
-            disabled={
-              this.state.forcedBid ||
-              this.state.disableBuyButton ||
-              this.state.auctionOn
-            }
-          >
-            Buy Property
-          </button>
-          <button onClick={this.bid} disabled={this.state.disableBid}>
-            Auction
-          </button>
-          <button onClick={this.endTurn} disabled={this.state.forcedBid}>
-            End Turn
-          </button>
+          <div>
+            <button
+              onClick={this.rollDice}
+              disabled={this.state.currentPlayerPlayed || this.state.auctionOn}
+            >
+              Roll Dice
+            </button>
+            <button
+              onClick={this.buyProperty}
+              disabled={
+                this.state.forcedBid ||
+                this.state.disableBuyButton ||
+                this.state.auctionOn
+              }
+            >
+              Buy Property
+            </button>
+            <button onClick={this.bid} disabled={this.state.disableBid}>
+              Auction
+            </button>
+            <button onClick={this.endTurn} disabled={this.state.forcedBid}>
+              End Turn
+            </button>
+          </div>
+          <div style={btnStyle}>
+            <h1>{this.state.players[0].name}</h1>
+            <p>{`Cash: $${this.state.players[0].getCurrentCash()}`}</p>
+          </div>
+          <Auction
+            auctionOn={this.state.auctionOn}
+            biddingSequence={[...this.state.players]}
+            name={currentPlayer.name}
+            onEndAuction={this.onEndAuction}
+          ></Auction>
+          <PlayerStats
+            player={currentPlayer}
+            gameBlocks={this.state.gameBlocks}
+          ></PlayerStats>
         </div>
-        <div style={btnStyle}>
-          <h1>{this.state.players[0].name}</h1>
-          <p>{`Cash: $${this.state.players[0].getCurrentCash()}`}</p>
-        </div>
-        <Auction
-          auctionOn={this.state.auctionOn}
-          biddingSequence={[...this.state.players]}
-          name={currentPlayerName}
-          onEndAuction={this.onEndAuction}
-        ></Auction>
       </div>
     );
   }
