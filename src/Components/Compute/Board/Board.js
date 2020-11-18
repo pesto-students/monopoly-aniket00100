@@ -2,8 +2,8 @@ import React from 'react';
 import BoardEl from '../../UI/BoardEl/BoardEl';
 
 import blocks from '../../../data/gameBlocks.json';
-import communityCards from '../../../data/communityCards.json';
-import chanceCards from '../../../data/chanceCards.json';
+// import communityCards from '../../../data/communityCards.json';
+// import chanceCards from '../../../data/chanceCards.json';
 import Player from '../Player/Player';
 import Dice from '../Dice/Dice';
 import Auction from '../AuctionBlock/Auction';
@@ -127,8 +127,8 @@ class Board extends React.Component {
   };
 
   bid = () => {
-    const currentPlayer = this.turn[0];
-    const { currentPosition } = currentPlayer;
+    // const currentPlayer = this.turn[0];
+    // const { currentPosition } = currentPlayer;
     const auctionOn = true;
     this.setState({ auctionOn });
   };
