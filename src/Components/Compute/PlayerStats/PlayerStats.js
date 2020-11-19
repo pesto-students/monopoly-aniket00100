@@ -16,12 +16,14 @@ export default class PlayerStats extends React.Component {
   }
 
   onBuild = (_, propertyIndex) => {
-    console.log('building on = ', propertyIndex);
-    const { gameBlocks } = this.state;
-    console.log(gameBlocks);
+    const { gameBlocks, currentPlayer } = this.state;
     const block = gameBlocks[propertyIndex];
     block.houseCount += 1;
-    this.setState({ gameBlocks });
+    block.houseCount = Math.min(block.houseCount, 5);
+    currentPlayer.buildOnProperty(block.groupNumber);
+    this.setState({ gameBlocks }, () => {
+      this.props.onTriggerSetState();
+    });
   };
 
   onMortgage = (_, propertyIndex) => {
@@ -41,7 +43,6 @@ export default class PlayerStats extends React.Component {
   };
 
   render() {
-    // console.log(this.state.gameBlocks);
     const { currentPlayer, gameBlocks } = this.state;
     return (
       <PlayerStatsUI

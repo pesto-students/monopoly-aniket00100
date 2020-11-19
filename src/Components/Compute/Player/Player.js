@@ -13,52 +13,63 @@ export default class Player {
       1: {
         max: 4,
         properties: [],
+        maxHouses: 0,
       },
       2: {
         max: 2,
         properties: [],
+        maxHouses: 0,
       },
       3: {
         max: 2,
         properties: [],
+        maxHouses: 0,
       },
       4: {
         max: 3,
         properties: [],
+        maxHouses: 0,
       },
       5: {
         max: 3,
         properties: [],
+        maxHouses: 0,
       },
       6: {
         max: 3,
         properties: [],
+        maxHouses: 0,
       },
       7: {
         max: 3,
         properties: [],
+        maxHouses: 0,
       },
       8: {
         max: 3,
         properties: [],
+        maxHouses: 0,
       },
       9: {
         max: 3,
         properties: [],
+        maxHouses: 0,
       },
       10: {
         max: 2,
         properties: [],
+        maxHouses: 0,
       },
     };
   }
 
-  buyProperty(cost, propertyIndex, groupNumber) {
-    this.properties.push(propertyIndex);
-    this.cash -= cost;
+  buyProperty(block) {
+    this.properties.push(block);
+    const { price, groupNumber } = block;
+    this.cash -= price;
     const propertyGroup = this.propertyGroups[groupNumber];
-    propertyGroup.properties.push(propertyIndex);
-    console.log(propertyGroup);
+    propertyGroup.properties.push(block);
+    return;
   }
 
   getCurrentCash() {
@@ -85,7 +96,19 @@ export default class Player {
     return;
   }
 
-  buildOnProperty(property) {}
+  buildOnProperty(groupNumber) {
+    console.log('Player js..');
+    const group = this.propertyGroups[`${groupNumber}`];
+    let { properties, maxHouses } = group;
+    for (const property of properties) {
+      const { houseCount } = property;
+      if (houseCount >= maxHouses) {
+        maxHouses = houseCount;
+        maxHouses = Math.min(maxHouses, 5);
+      }
+    }
+    console.log(maxHouses);
+  }
 
   collectRent(rent) {
     this.cash += rent;

@@ -122,19 +122,16 @@ class Board extends React.Component {
     const { currentPosition } = currentPlayer;
 
     const cash = currentPlayer.getCurrentCash();
-    const costOfProperty = this.gameBlocks[currentPosition].price;
-    const propertyGroup = this.gameBlocks[currentPosition].groupNumber;
-    if (cash >= costOfProperty) {
+    const block = this.gameBlocks[currentPosition];
+    if (cash >= block.price) {
       this.gameBlocks[currentPosition].owner = currentPlayer;
-      currentPlayer.buyProperty(costOfProperty, currentPosition, propertyGroup);
+      currentPlayer.buyProperty(block);
       return this.setState({ gameBlocks: [...this.gameBlocks] });
     }
     this.setState({ forcedBid: true });
   };
 
   bid = () => {
-    // const currentPlayer = this.turn[0];
-    // const { currentPosition } = currentPlayer;
     const auctionOn = true;
     this.setState({ auctionOn });
   };
@@ -142,8 +139,8 @@ class Board extends React.Component {
   onEndAuction = (player) => {
     const currentBlockIndex = this.state.players[0].currentPosition;
     this.gameBlocks[currentBlockIndex].owner = player;
-    const { price, groupNumber } = this.gameBlocks[currentBlockIndex];
-    player.buyProperty(price, currentBlockIndex, groupNumber);
+    const block = this.gameBlocks[currentBlockIndex];
+    player.buyProperty(block);
     console.log(player);
     this.setState({ gameBlocks: [...this.gameBlocks], auctionOn: false });
   };

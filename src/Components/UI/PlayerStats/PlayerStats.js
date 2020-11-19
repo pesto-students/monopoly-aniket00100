@@ -4,17 +4,14 @@ import './PlayerStats.css';
 
 export default function PlayerStats(props) {
   const { player, gameBlocks, onBuild, onMortgage, onRedeem } = props;
-  const properties = player.properties.map((index) => {
-    return gameBlocks[index];
-  });
-  const mortgagedProperties = player.mortgagedProperties.map((index) => {
-    return gameBlocks[index];
-  });
+  const { properties, mortgagedProperties } = player;
   const propertiesList = properties.map((property) => {
     const { name, index, groupNumber } = property;
     const { propertyGroups } = player;
-    const { max, properties } = propertyGroups[groupNumber];
-    const buildEnable = max === properties.length;
+    const { max, properties, maxHouses } = propertyGroups[groupNumber];
+    const buildDisable = max === properties.length;
+    const canBuild = maxHouses > gameBlocks[index].houseCount;
+
     return (
       <div key={name} className="d-flex cell">
         <p className="property-title mr-auto">{name}</p>
@@ -27,7 +24,7 @@ export default function PlayerStats(props) {
         <button
           className="mtg-btn"
           onClick={(event) => onBuild(event, index)}
-          disabled={!buildEnable}
+          disabled={buildDisable || !canBuild}
         >
           Build
         </button>
