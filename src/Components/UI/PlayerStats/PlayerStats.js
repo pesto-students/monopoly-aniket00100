@@ -3,7 +3,7 @@ import React from 'react';
 import './PlayerStats.css';
 
 export default function PlayerStats(props) {
-  const { player, gameBlocks, onBuild } = props;
+  const { player, gameBlocks, onBuild, onMortgage, onRedeem } = props;
   const properties = player.properties.map((index) => {
     return gameBlocks[index];
   });
@@ -15,7 +15,12 @@ export default function PlayerStats(props) {
     return (
       <div key={name} className="d-flex cell">
         <p className="property-title mr-auto">{name}</p>
-        <button className="mtg-btn">Mortgage</button>
+        <button
+          className="mtg-btn"
+          onClick={(event) => onMortgage(event, index)}
+        >
+          Mortgage
+        </button>
         <button className="mtg-btn" onClick={(event) => onBuild(event, index)}>
           Build
         </button>
@@ -23,8 +28,15 @@ export default function PlayerStats(props) {
     );
   });
   const mortgagedPropertyList = properties.map((property) => {
-    const { name } = property;
-    return <p key={name}>{name}</p>;
+    const { name, index } = property;
+    return (
+      <div className="d-flex cell" key={name}>
+        <p className="property-title mr-auto">{name}</p>
+        <button className="mtg-btn" onClick={(event) => onRedeem(event, index)}>
+          Redeem
+        </button>
+      </div>
+    );
   });
   return (
     <div>
@@ -32,12 +44,12 @@ export default function PlayerStats(props) {
       <h3>{player.name}</h3>
       <div className="d-flex">
         <div className="tables">
-          <p>Owned Properties</p>
+          <p className="tables-title">Owned Properties</p>
           <hr />
           {properties.length ? propertiesList : null}
         </div>
         <div className="tables">
-          <p>Mortgaged Properties</p>
+          <p className="tables-title">Mortgaged Properties</p>
           <hr />
           {mortgagedProperties.length ? mortgagedPropertyList : null}
         </div>

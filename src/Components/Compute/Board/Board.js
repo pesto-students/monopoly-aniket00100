@@ -27,10 +27,10 @@ class Board extends React.Component {
     this.chanceBlocks = [7, 22, 36];
     this.taxBlocks = [4, 38];
 
-    this.player1 = new Player('Player 1', 'black', 1500);
-    this.player2 = new Player('Player 2', 'purple', 1500);
-    this.player3 = new Player('Player 3', 'blue', 1500);
-    this.player4 = new Player('Player 4', 'green', 1500);
+    this.player1 = new Player('Shaktiman', 'maroon', 1500);
+    this.player2 = new Player('Kilvish', 'black', 1500);
+    this.player3 = new Player('Dr Strange', 'green', 1500);
+    this.player4 = new Player('Thanos', 'purple', 1500);
 
     this.turn = [this.player1, this.player2, this.player3, this.player4];
     this.gameBlocks[0].currentPlayers = [...this.turn];
@@ -157,6 +157,12 @@ class Board extends React.Component {
     });
   };
 
+  onTriggerSetState = () => {
+    const { players } = this.state;
+    // players = [...players];
+    this.setState({ players });
+  };
+
   render() {
     // console.log(this.state.players);
     const currentPlayer = this.state.players[0];
@@ -205,6 +211,7 @@ class Board extends React.Component {
           <PlayerStats
             player={currentPlayer}
             gameBlocks={this.state.gameBlocks}
+            onTriggerSetState={this.onTriggerSetState}
           ></PlayerStats>
         </div>
       </div>

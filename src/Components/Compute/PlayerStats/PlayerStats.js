@@ -24,6 +24,22 @@ export default class PlayerStats extends React.Component {
     this.setState({ gameBlocks });
   };
 
+  onMortgage = (_, propertyIndex) => {
+    const { currentPlayer, gameBlocks } = this.state;
+    currentPlayer.mortgageProperty(gameBlocks[propertyIndex]);
+    this.setState({ currentPlayer }, () => {
+      this.props.onTriggerSetState();
+    });
+  };
+
+  onRedeem = (_, propertyIndex) => {
+    const { currentPlayer, gameBlocks } = this.state;
+    currentPlayer.redeemMortgagedProperty(gameBlocks[propertyIndex]);
+    this.setState({ currentPlayer }, () => {
+      this.props.onTriggerSetState();
+    });
+  };
+
   render() {
     // console.log(this.state.gameBlocks);
     const { currentPlayer, gameBlocks } = this.state;
@@ -32,6 +48,8 @@ export default class PlayerStats extends React.Component {
         player={currentPlayer}
         gameBlocks={gameBlocks}
         onBuild={this.onBuild}
+        onMortgage={this.onMortgage}
+        onRedeem={this.onRedeem}
       ></PlayerStatsUI>
     );
   }
