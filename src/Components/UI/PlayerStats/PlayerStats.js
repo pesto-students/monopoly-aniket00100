@@ -11,7 +11,10 @@ export default function PlayerStats(props) {
     return gameBlocks[index];
   });
   const propertiesList = properties.map((property) => {
-    const { name, index } = property;
+    const { name, index, groupNumber } = property;
+    const { propertyGroups } = player;
+    const { max, properties } = propertyGroups[groupNumber];
+    const buildEnable = max === properties.length;
     return (
       <div key={name} className="d-flex cell">
         <p className="property-title mr-auto">{name}</p>
@@ -21,7 +24,11 @@ export default function PlayerStats(props) {
         >
           Mortgage
         </button>
-        <button className="mtg-btn" onClick={(event) => onBuild(event, index)}>
+        <button
+          className="mtg-btn"
+          onClick={(event) => onBuild(event, index)}
+          disabled={!buildEnable}
+        >
           Build
         </button>
       </div>

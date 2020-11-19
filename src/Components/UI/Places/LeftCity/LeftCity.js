@@ -3,7 +3,7 @@ import React from 'react';
 import './LeftCity.css';
 
 export default function LeftCity({ blockDetails }) {
-  const { color, name, currentPlayers, owner } = blockDetails;
+  const { color, name, currentPlayers, owner, houseCount } = blockDetails;
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;
     return (
@@ -24,7 +24,9 @@ export default function LeftCity({ blockDetails }) {
         <div className="player-left-position">
           <div className="p-boxes">{playerBoxes}</div>
         </div>
-        <div className="left-city-houses"></div>
+        <div className="left-city-houses">
+          <p>{houseCount ? houseCount : null}</p>
+        </div>
         <div className="left-city-name">{name}</div>
         <div className="left-city" style={{ backgroundColor: color }}></div>
       </div>

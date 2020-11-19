@@ -27,7 +27,7 @@ class Board extends React.Component {
     this.chanceBlocks = [7, 22, 36];
     this.taxBlocks = [4, 38];
 
-    this.player1 = new Player('Shaktiman', 'maroon', 1500);
+    this.player1 = new Player('Shaktiman', 'crimson', 1500);
     this.player2 = new Player('Kilvish', 'black', 1500);
     this.player3 = new Player('Dr Strange', 'green', 1500);
     this.player4 = new Player('Thanos', 'purple', 1500);
@@ -123,9 +123,10 @@ class Board extends React.Component {
 
     const cash = currentPlayer.getCurrentCash();
     const costOfProperty = this.gameBlocks[currentPosition].price;
+    const propertyGroup = this.gameBlocks[currentPosition].groupNumber;
     if (cash >= costOfProperty) {
       this.gameBlocks[currentPosition].owner = currentPlayer;
-      currentPlayer.buyProperty(costOfProperty, currentPosition);
+      currentPlayer.buyProperty(costOfProperty, currentPosition, propertyGroup);
       return this.setState({ gameBlocks: [...this.gameBlocks] });
     }
     this.setState({ forcedBid: true });
@@ -141,8 +142,8 @@ class Board extends React.Component {
   onEndAuction = (player) => {
     const currentBlockIndex = this.state.players[0].currentPosition;
     this.gameBlocks[currentBlockIndex].owner = player;
-    const { price } = this.gameBlocks[currentBlockIndex];
-    player.buyProperty(price, currentBlockIndex);
+    const { price, groupNumber } = this.gameBlocks[currentBlockIndex];
+    player.buyProperty(price, currentBlockIndex, groupNumber);
     console.log(player);
     this.setState({ gameBlocks: [...this.gameBlocks], auctionOn: false });
   };

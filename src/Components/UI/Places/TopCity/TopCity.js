@@ -3,7 +3,7 @@ import React from 'react';
 import './TopCity.css';
 
 export default function TopCity({ blockDetails }) {
-  const { color, name, currentPlayers, owner } = blockDetails;
+  const { color, name, currentPlayers, owner, houseCount } = blockDetails;
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;
     return (
@@ -23,7 +23,9 @@ export default function TopCity({ blockDetails }) {
         <div className="player-top-position">
           <div className="d-flex">{playerBoxes}</div>
         </div>
-        <div className="top-city-houses"></div>
+        <div className="top-city-houses">
+          <p>{houseCount ? houseCount : null}</p>
+        </div>
         <div className="top-city-name">{name}</div>
       </div>
       <div className="top-city" style={{ backgroundColor: color }}></div>

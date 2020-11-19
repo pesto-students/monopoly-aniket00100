@@ -3,7 +3,7 @@ import React from 'react';
 import './RightCity.css';
 
 export default function RightCity({ blockDetails }) {
-  const { color, name, currentPlayers, owner } = blockDetails;
+  const { color, name, currentPlayers, owner, houseCount } = blockDetails;
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;
     return (
@@ -19,7 +19,9 @@ export default function RightCity({ blockDetails }) {
       <div className="d-flex">
         <div className="right-city" style={{ backgroundColor: color }}></div>
         <div className="right-city-name">{name}</div>
-        <div className="right-city-house"></div>
+        <div className="right-city-house">
+          <p>{houseCount ? houseCount : null}</p>
+        </div>
         <div className="player-right-position">
           <div className="p-boxes">{playerBoxes}</div>
         </div>

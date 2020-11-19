@@ -3,7 +3,7 @@ import React from 'react';
 import './BottomCity.css';
 
 export default function BottomCity({ blockDetails }) {
-  const { color, name, currentPlayers, owner } = blockDetails;
+  const { color, name, currentPlayers, owner, houseCount } = blockDetails;
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;
     return (
@@ -24,7 +24,9 @@ export default function BottomCity({ blockDetails }) {
       ></div>
       <div className="bottom-city-content">
         <p>{name}</p>
-        <div className="bottom-city-construction"></div>
+        <div className="bottom-city-construction">
+          <p>{houseCount ? houseCount : null}</p>
+        </div>
         <div className="player-position-bottom">
           <div className="d-flex">{playerBoxes}</div>
         </div>

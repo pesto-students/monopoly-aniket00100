@@ -9,13 +9,56 @@ export default class Player {
     this.doubleRollCount = 0;
     this.currentPosition = 0;
     this.getOutOfJailFreeCard = 0;
+    this.propertyGroups = {
+      1: {
+        max: 4,
+        properties: [],
+      },
+      2: {
+        max: 2,
+        properties: [],
+      },
+      3: {
+        max: 2,
+        properties: [],
+      },
+      4: {
+        max: 3,
+        properties: [],
+      },
+      5: {
+        max: 3,
+        properties: [],
+      },
+      6: {
+        max: 3,
+        properties: [],
+      },
+      7: {
+        max: 3,
+        properties: [],
+      },
+      8: {
+        max: 3,
+        properties: [],
+      },
+      9: {
+        max: 3,
+        properties: [],
+      },
+      10: {
+        max: 2,
+        properties: [],
+      },
+    };
   }
 
-  buyProperty(cost, propertyIndex) {
-    console.log(cost);
+  buyProperty(cost, propertyIndex, groupNumber) {
     this.properties.push(propertyIndex);
     this.cash -= cost;
-    console.log('bought property at = ', propertyIndex);
+    const propertyGroup = this.propertyGroups[groupNumber];
+    propertyGroup.properties.push(propertyIndex);
+    console.log(propertyGroup);
   }
 
   getCurrentCash() {
