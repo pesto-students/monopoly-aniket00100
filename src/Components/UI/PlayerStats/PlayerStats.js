@@ -3,14 +3,22 @@ import React from 'react';
 import './PlayerStats.css';
 
 export default function PlayerStats(props) {
-  const { player, gameBlocks, onBuild, onMortgage, onRedeem } = props;
-  const { properties, mortgagedProperties } = player;
+  const { player, onBuild, onMortgage, onRedeem } = props;
+  const { properties, mortgagedProperties, propertyGroups } = player;
   const propertiesList = properties.map((property) => {
-    const { name, index, groupNumber } = property;
-    const { propertyGroups } = player;
-    const { max, properties, maxHouses } = propertyGroups[groupNumber];
-    const buildDisable = max === properties.length;
-    const canBuild = maxHouses > gameBlocks[index].houseCount;
+    const { name, index, groupNumber, houseCount } = property;
+    const { max, properties, maxHouses, allOnSameHouseLevel } = propertyGroups[
+      groupNumber
+    ];
+    const buildEnable = max === properties.length;
+    let canBuild = false;
+    if (buildEnable) {
+      if (maxHouses === 0 || maxHouses > houseCount || allOnSameHouseLevel) {
+        canBuild = true;
+      }
+    }
+
+    const mortgageDisabled = maxHouses !== 0;
 
     return (
       <div key={name} className="d-flex cell">
@@ -18,13 +26,14 @@ export default function PlayerStats(props) {
         <button
           className="mtg-btn"
           onClick={(event) => onMortgage(event, index)}
+          disabled={mortgageDisabled}
         >
           Mortgage
         </button>
         <button
           className="mtg-btn"
           onClick={(event) => onBuild(event, index)}
-          disabled={buildDisable || !canBuild}
+          disabled={!canBuild}
         >
           Build
         </button>

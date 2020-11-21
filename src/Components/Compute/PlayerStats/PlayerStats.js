@@ -43,11 +43,10 @@ export default class PlayerStats extends React.Component {
   };
 
   render() {
-    const { currentPlayer, gameBlocks } = this.state;
+    const { currentPlayer } = this.state;
     return (
       <PlayerStatsUI
         player={currentPlayer}
-        gameBlocks={gameBlocks}
         onBuild={this.onBuild}
         onMortgage={this.onMortgage}
         onRedeem={this.onRedeem}

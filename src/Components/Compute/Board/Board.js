@@ -45,8 +45,9 @@ class Board extends React.Component {
       currentPlayerPlayed: false,
       forcedBid: false,
       disableBuyButton: false,
-      disableBid: false,
+      disableAuction: false,
       auctionOn: false,
+      disableEndTurn: false,
     };
   }
 
@@ -63,7 +64,7 @@ class Board extends React.Component {
   };
 
   componentDidMount() {
-    // this.setState({gameOn: true});
+    this.setState({ disableBuyButton: true, disableAuction: true });
   }
 
   rollDice = () => {
@@ -85,12 +86,12 @@ class Board extends React.Component {
     currentPlayer.currentPosition %= 40;
     const newBlock = gameBlocks[currentPlayer.currentPosition];
     let disableBuyButton = false;
-    let disableBid = false;
+    let disableAuction = false;
     if (playerCash < newBlock.price) {
       disableBuyButton = true;
     }
     if (newBlock.owner !== null) {
-      disableBid = true;
+      disableAuction = true;
       disableBuyButton = true;
       const { owner } = newBlock;
       const rent = currentPlayer.payRent(newBlock);
@@ -106,34 +107,39 @@ class Board extends React.Component {
         gameBlocks,
         currentPlayerPlayed: true,
         disableBuyButton,
-        disableBid,
+        disableAuction,
       });
     }
     return this.setState({
       gameBlocks,
       currentPlayerPlayed: false,
       disableBuyButton,
-      disableBid,
+      disableAuction,
     });
   };
 
   buyProperty = () => {
     const currentPlayer = this.turn[0];
     const { currentPosition } = currentPlayer;
-
+    const disableBuyButton = true;
+    const disableAuction = true;
     const cash = currentPlayer.getCurrentCash();
     const block = this.gameBlocks[currentPosition];
     if (cash >= block.price) {
       this.gameBlocks[currentPosition].owner = currentPlayer;
       currentPlayer.buyProperty(block);
-      return this.setState({ gameBlocks: [...this.gameBlocks] });
+      return this.setState({
+        gameBlocks: [...this.gameBlocks],
+        disableBuyButton,
+        disableAuction,
+      });
     }
-    this.setState({ forcedBid: true });
+    this.setState({ forcedBid: true, disableBuyButton, disableAuction });
   };
 
-  bid = () => {
+  onAuction = () => {
     const auctionOn = true;
-    this.setState({ auctionOn });
+    this.setState({ auctionOn, disableAuction: true, disableEndTurn: true });
   };
 
   onEndAuction = (player) => {
@@ -141,8 +147,12 @@ class Board extends React.Component {
     this.gameBlocks[currentBlockIndex].owner = player;
     const block = this.gameBlocks[currentBlockIndex];
     player.buyProperty(block);
-    console.log(player);
-    this.setState({ gameBlocks: [...this.gameBlocks], auctionOn: false });
+    this.setState({
+      gameBlocks: [...this.gameBlocks],
+      auctionOn: false,
+      disableEndTurn: false,
+      disableBuyButton: true,
+    });
   };
 
   endTurn = () => {
@@ -152,63 +162,70 @@ class Board extends React.Component {
       players: this.turn,
       currentPlayerPlayed: false,
       auctionOn: false,
+      disableBuyButton: true,
+      disableAuction: true,
     });
   };
 
   onTriggerSetState = () => {
-    const { players } = this.state;
-    // players = [...players];
-    this.setState({ players });
+    const { players, gameBlocks } = this.state;
+    this.setState({ players, gameBlocks });
   };
 
   render() {
-    // console.log(this.state.players);
-    const currentPlayer = this.state.players[0];
+    const {
+      players,
+      gameOn,
+      gameBlocks,
+      currentPlayerPlayed,
+      forcedBid,
+      disableBuyButton,
+      disableAuction,
+      auctionOn,
+      disableEndTurn,
+    } = this.state;
+    const [currentPlayer] = players;
     // console.log(currentPlayerName);
     return (
       <div className="d-flex">
-        <BoardEl
-          gameBlocks={this.state.gameBlocks}
-          gameOn={this.state.gameOn}
-        ></BoardEl>
+        <BoardEl gameBlocks={gameBlocks} gameOn={gameOn}></BoardEl>
         <div style={btnStyle}>
           <div>
             <button
               onClick={this.rollDice}
-              disabled={this.state.currentPlayerPlayed || this.state.auctionOn}
+              disabled={currentPlayerPlayed || auctionOn}
             >
               Roll Dice
             </button>
             <button
               onClick={this.buyProperty}
-              disabled={
-                this.state.forcedBid ||
-                this.state.disableBuyButton ||
-                this.state.auctionOn
-              }
+              disabled={forcedBid || disableBuyButton || auctionOn}
             >
               Buy Property
             </button>
-            <button onClick={this.bid} disabled={this.state.disableBid}>
+            <button onClick={this.onAuction} disabled={disableAuction}>
               Auction
             </button>
-            <button onClick={this.endTurn} disabled={this.state.forcedBid}>
+            <button
+              onClick={this.endTurn}
+              disabled={forcedBid || disableEndTurn}
+            >
               End Turn
             </button>
           </div>
           <div style={btnStyle}>
-            <h1>{this.state.players[0].name}</h1>
-            <p>{`Cash: $${this.state.players[0].getCurrentCash()}`}</p>
+            <h1>{currentPlayer.name}</h1>
+            <p>{`Cash: $${currentPlayer.getCurrentCash()}`}</p>
           </div>
           <Auction
-            auctionOn={this.state.auctionOn}
-            biddingSequence={[...this.state.players]}
+            auctionOn={auctionOn}
+            biddingSequence={[...players]}
             name={currentPlayer.name}
             onEndAuction={this.onEndAuction}
           ></Auction>
           <PlayerStats
             player={currentPlayer}
-            gameBlocks={this.state.gameBlocks}
+            gameBlocks={gameBlocks}
             onTriggerSetState={this.onTriggerSetState}
           ></PlayerStats>
         </div>

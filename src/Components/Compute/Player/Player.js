@@ -14,51 +14,61 @@ export default class Player {
         max: 4,
         properties: [],
         maxHouses: 0,
+        allOnSameHouseLevel: false,
       },
       2: {
         max: 2,
         properties: [],
         maxHouses: 0,
+        allOnSameHouseLevel: false,
       },
       3: {
         max: 2,
         properties: [],
         maxHouses: 0,
+        allOnSameHouseLevel: false,
       },
       4: {
         max: 3,
         properties: [],
         maxHouses: 0,
+        allOnSameHouseLevel: false,
       },
       5: {
         max: 3,
         properties: [],
         maxHouses: 0,
+        allOnSameHouseLevel: false,
       },
       6: {
         max: 3,
         properties: [],
         maxHouses: 0,
+        allOnSameHouseLevel: false,
       },
       7: {
         max: 3,
         properties: [],
         maxHouses: 0,
+        allOnSameHouseLevel: false,
       },
       8: {
         max: 3,
         properties: [],
         maxHouses: 0,
+        allOnSameHouseLevel: false,
       },
       9: {
         max: 3,
         properties: [],
         maxHouses: 0,
+        allOnSameHouseLevel: false,
       },
       10: {
         max: 2,
         properties: [],
         maxHouses: 0,
+        allOnSameHouseLevel: false,
       },
     };
   }
@@ -98,16 +108,26 @@ export default class Player {
 
   buildOnProperty(groupNumber) {
     console.log('Player js..');
-    const group = this.propertyGroups[`${groupNumber}`];
-    let { properties, maxHouses } = group;
-    for (const property of properties) {
+    const propertyGroup = this.propertyGroups[groupNumber];
+    let { properties } = propertyGroup;
+    properties.forEach((property) => {
       const { houseCount } = property;
-      if (houseCount >= maxHouses) {
-        maxHouses = houseCount;
-        maxHouses = Math.min(maxHouses, 5);
+      if (houseCount >= propertyGroup.maxHouses) {
+        propertyGroup.maxHouses = houseCount;
+        propertyGroup.maxHouses = Math.min(propertyGroup.maxHouses, 5);
+        console.log(propertyGroup.maxHouses);
       }
+    });
+    let newHouseLevel = true;
+    properties.forEach((property) => {
+      if (propertyGroup.maxHouses !== property.houseCount) {
+        newHouseLevel = false;
+      }
+    });
+    propertyGroup.allOnSameHouseLevel = newHouseLevel;
+    if (propertyGroup.maxHouses >= 5) {
+      propertyGroup.allOnSameHouseLevel = false;
     }
-    console.log(maxHouses);
   }
 
   collectRent(rent) {
