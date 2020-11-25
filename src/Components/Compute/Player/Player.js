@@ -86,8 +86,6 @@ export default class Player {
     return this.cash;
   }
 
-  tradeProperty(getProperty, giveProperty = null, extraCash = 0) {}
-
   mortgageProperty(property) {
     console.log(property);
     const { price } = property;
@@ -106,8 +104,7 @@ export default class Player {
     return;
   }
 
-  buildOnProperty(groupNumber) {
-    console.log('Player js..');
+  handleConstructionOnProperty(groupNumber) {
     const propertyGroup = this.propertyGroups[groupNumber];
     let { properties } = propertyGroup;
     properties.forEach((property) => {
@@ -115,7 +112,6 @@ export default class Player {
       if (houseCount >= propertyGroup.maxHouses) {
         propertyGroup.maxHouses = houseCount;
         propertyGroup.maxHouses = Math.min(propertyGroup.maxHouses, 5);
-        console.log(propertyGroup.maxHouses);
       }
     });
     let newHouseLevel = true;
@@ -136,9 +132,7 @@ export default class Player {
   }
 
   creditSalary(salary) {
-    console.log('before salary = ', this.cash);
     this.cash += salary;
-    console.log('after salary = ', this.cash);
     return;
   }
 
@@ -148,6 +142,34 @@ export default class Player {
     const rent = property[rentString];
     this.cash -= rent;
     return rent;
+  }
+
+  trade(
+    counterParty,
+    propertiesToSend,
+    propertiesToAsk,
+    cashToSend,
+    cashAsked
+  ) {
+    const mainPartyProperties = this.properties;
+    const counterPartyProperties = counterParty.properties;
+    propertiesToSend.forEach((property) => {
+      const index = mainPartyProperties.indexOf(property);
+      mainPartyProperties.splice(index, 1);
+      counterPartyProperties.push(property);
+      property.owner = counterParty;
+    });
+    propertiesToAsk.forEach((property) => {
+      const index = counterPartyProperties.indexOf(property);
+      counterPartyProperties.splice(index, 1);
+      mainPartyProperties.push(property);
+      property.owner = this;
+    });
+    this.cash -= Number(cashToSend);
+    counterParty.cash += Number(cashToSend);
+    counterParty.cash -= Number(cashAsked);
+    this.cash += Number(cashAsked);
+    return;
   }
 
   declareBankruptcy() {}

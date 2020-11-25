@@ -3,8 +3,9 @@ import React from 'react';
 import './PlayerStats.css';
 
 export default function PlayerStats(props) {
-  const { player, onBuild, onMortgage, onRedeem } = props;
+  const { player, onBuild, onMortgage, onRedeem, onSellHouse } = props;
   const { properties, mortgagedProperties, propertyGroups } = player;
+
   const propertiesList = properties.map((property) => {
     const { name, index, groupNumber, houseCount } = property;
     const { max, properties, maxHouses, allOnSameHouseLevel } = propertyGroups[
@@ -12,9 +13,15 @@ export default function PlayerStats(props) {
     ];
     const buildEnable = max === properties.length;
     let canBuild = false;
+    let canSell = false;
     if (buildEnable) {
       if (maxHouses === 0 || maxHouses > houseCount || allOnSameHouseLevel) {
         canBuild = true;
+      } else {
+        canSell = true;
+      }
+      if (maxHouses > 0 && allOnSameHouseLevel) {
+        canSell = true;
       }
     }
 
@@ -37,9 +44,17 @@ export default function PlayerStats(props) {
         >
           Build
         </button>
+        <button
+          className="mtg-btn"
+          disabled={!canSell}
+          onClick={(event) => onSellHouse(event, index)}
+        >
+          Sell
+        </button>
       </div>
     );
   });
+
   const mortgagedPropertyList = properties.map((property) => {
     const { name, index } = property;
     return (

@@ -18,7 +18,8 @@ export default function AuctionBlock(props) {
       <h3>{`Bid to beat: $${highestBid ? highestBid : 0}`}</h3>
       <input
         placeholder="Enter your bid"
-        onChange={(event, player) => onInputChange(event, player)}
+        type="number"
+        onChange={onInputChange}
       />
       <button onClick={onBidSubmit}>Bid</button>
       <button onClick={onGiveUp}>Give Up!</button>

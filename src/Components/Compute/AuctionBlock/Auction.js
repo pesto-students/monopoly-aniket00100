@@ -40,7 +40,7 @@ export default class Auction extends React.Component {
     });
   };
 
-  onInputChange = (event, player) => {
+  onInputChange = (event) => {
     const { value } = event.target;
     this.setState({ currentBid: Number(value) });
   };

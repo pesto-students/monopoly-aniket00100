@@ -8,6 +8,7 @@ import Player from '../Player/Player';
 import Dice from '../Dice/Dice';
 import Auction from '../AuctionBlock/Auction';
 import PlayerStats from '../PlayerStats/PlayerStats';
+import Trade from '../Trade/Trade';
 
 const btnStyle = {
   margin: 'auto',
@@ -48,6 +49,7 @@ class Board extends React.Component {
       disableAuction: false,
       auctionOn: false,
       disableEndTurn: false,
+      tradeOn: false,
     };
   }
 
@@ -155,6 +157,10 @@ class Board extends React.Component {
     });
   };
 
+  onTrade = () => {
+    this.setState({ tradeOn: true });
+  };
+
   endTurn = () => {
     this.turn = [...this.turn.slice(1), this.turn[0]];
 
@@ -164,6 +170,7 @@ class Board extends React.Component {
       auctionOn: false,
       disableBuyButton: true,
       disableAuction: true,
+      tradeOn: false,
     });
   };
 
@@ -183,9 +190,16 @@ class Board extends React.Component {
       disableAuction,
       auctionOn,
       disableEndTurn,
+      tradeOn,
     } = this.state;
     const [currentPlayer] = players;
-    // console.log(currentPlayerName);
+    const tradeComponent = tradeOn ? (
+      <Trade
+        currentPlayer={currentPlayer}
+        players={[...players]}
+        onTriggerSetState={this.onTriggerSetState}
+      ></Trade>
+    ) : null;
     return (
       <div className="d-flex">
         <BoardEl gameBlocks={gameBlocks} gameOn={gameOn}></BoardEl>
@@ -206,6 +220,7 @@ class Board extends React.Component {
             <button onClick={this.onAuction} disabled={disableAuction}>
               Auction
             </button>
+            <button onClick={this.onTrade}>Trade</button>
             <button
               onClick={this.endTurn}
               disabled={forcedBid || disableEndTurn}
@@ -228,6 +243,7 @@ class Board extends React.Component {
             gameBlocks={gameBlocks}
             onTriggerSetState={this.onTriggerSetState}
           ></PlayerStats>
+          {tradeComponent}
         </div>
       </div>
     );
