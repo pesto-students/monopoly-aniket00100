@@ -5,13 +5,12 @@ import AuctionBlock from '../../UI/AuctionBlock/AuctionBlock';
 export default class Auction extends React.Component {
   constructor(props) {
     super(props);
-    this.initialState = {
+    this.state = {
       biddingSequence: props.biddingSequence,
       highestBid: null,
       winningPlayer: null,
       currentBid: null,
     };
-    this.state = { ...this.initialState };
   }
 
   componentDidUpdate(prevProps) {
@@ -34,9 +33,9 @@ export default class Auction extends React.Component {
   };
 
   onEndAuction = () => {
-    const { winningPlayer } = this.state;
+    const { winningPlayer, highestBid } = this.state;
     this.setState({ ...this.initialState }, () => {
-      this.props.onEndAuction(winningPlayer);
+      this.props.onEndAuction(winningPlayer, highestBid);
     });
   };
 

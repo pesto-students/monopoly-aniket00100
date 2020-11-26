@@ -34,7 +34,7 @@ class Board extends React.Component {
     this.player1 = new Player('Shaktiman', 'crimson', 1500);
     this.player2 = new Player('Kilvish', 'black', 1500);
     this.player3 = new Player('Dr Strange', 'green', 1500);
-    this.player4 = new Player('Thanos', 'purple', 1500);
+    this.player4 = new Player('Thanos', 'purple', 10);
 
     this.turn = [this.player1, this.player2, this.player3, this.player4];
     this.gameBlocks[0].currentPlayers = [...this.turn];
@@ -43,7 +43,7 @@ class Board extends React.Component {
     this.goToJailBlock = 30;
 
     this.state = {
-      players: [...this.turn],
+      players: this.turn,
       gameOn: false,
       gameBlocks: this.gameBlocks,
       currentPlayerPlayed: false,
@@ -85,8 +85,8 @@ class Board extends React.Component {
 
     const [first, second] = this.dice.rollDice();
 
-    // currentPlayer.currentPosition += first + second;
-    currentPlayer.currentPosition += 30;
+    currentPlayer.currentPosition += first + second;
+    // currentPlayer.currentPosition += 30;
     if (currentPlayer.currentPosition >= 40) {
       currentPlayer.creditSalary(200);
     }
@@ -109,6 +109,10 @@ class Board extends React.Component {
     gameBlocks[currentPlayer.currentPosition].currentPlayers.push(
       currentPlayer
     );
+
+    const cost = gameBlocks[currentPlayer.currentPosition].price;
+    const forcedBid = cost > currentPlayer.cash ? true : false;
+
     if (first !== second) {
       return this.setState(
         {
@@ -116,6 +120,7 @@ class Board extends React.Component {
           currentPlayerPlayed: true,
           disableBuyButton,
           disableAuction,
+          forcedBid,
         },
         () => {
           this.jailOrCardCheck();
@@ -128,6 +133,7 @@ class Board extends React.Component {
         currentPlayerPlayed: false,
         disableBuyButton,
         disableAuction,
+        forcedBid,
       },
       () => {
         this.jailOrCardCheck();
@@ -198,16 +204,17 @@ class Board extends React.Component {
     this.setState({ auctionOn, disableAuction: true, disableEndTurn: true });
   };
 
-  onEndAuction = (player) => {
+  onEndAuction = (player, cost) => {
     const currentBlockIndex = this.state.players[0].currentPosition;
     this.gameBlocks[currentBlockIndex].owner = player;
     const block = this.gameBlocks[currentBlockIndex];
-    player.buyProperty(block);
+    player.auctionBuyProperty(block, cost);
     this.setState({
       gameBlocks: [...this.gameBlocks],
       auctionOn: false,
       disableEndTurn: false,
       disableBuyButton: true,
+      forcedBid: false,
     });
   };
 
@@ -220,6 +227,27 @@ class Board extends React.Component {
 
     this.setState({
       players: this.turn,
+      currentPlayerPlayed: false,
+      auctionOn: false,
+      disableBuyButton: true,
+      disableAuction: true,
+      tradeOn: false,
+      chanceCommunityText: '',
+    });
+  };
+
+  onDeclareBankruptcy = () => {
+    const [bankruptPlayer] = this.turn;
+    const { currentPosition } = bankruptPlayer;
+    const index = this.gameBlocks[currentPosition].currentPlayers.indexOf(
+      bankruptPlayer
+    );
+    this.gameBlocks[currentPosition].currentPlayers.splice(index, 1);
+    bankruptPlayer.declareBankruptcy();
+    this.turn = this.turn.slice(1);
+    this.setState({
+      players: this.turn,
+      gameBlocks: this.gameBlocks,
       currentPlayerPlayed: false,
       auctionOn: false,
       disableBuyButton: true,
@@ -248,6 +276,7 @@ class Board extends React.Component {
       tradeOn,
       chanceCommunityText,
     } = this.state;
+
     const [currentPlayer] = players;
     const block = gameBlocks[currentPlayer.currentPosition];
     const tradeComponent = tradeOn ? (
@@ -285,6 +314,9 @@ class Board extends React.Component {
               disabled={forcedBid || disableEndTurn}
             >
               End Turn
+            </button>
+            <button onClick={this.onDeclareBankruptcy}>
+              Declare Bankruptcy
             </button>
           </div>
           <div style={btnStyle}>

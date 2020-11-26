@@ -73,6 +73,15 @@ export default class Player {
     };
   }
 
+  auctionBuyProperty(block, cost) {
+    this.properties.push(block);
+    const { groupNumber } = block;
+    this.cash -= cost;
+    const propertyGroup = this.propertyGroups[groupNumber];
+    propertyGroup.properties.push(block);
+    return;
+  }
+
   buyProperty(block) {
     this.properties.push(block);
     const { price, groupNumber } = block;
@@ -194,5 +203,11 @@ export default class Player {
     return hotels;
   };
 
-  declareBankruptcy() {}
+  declareBankruptcy() {
+    this.properties.forEach((property) => {
+      property.owner = null;
+      property.houseCount = 0;
+      property.mortgaged = false;
+    });
+  }
 }
