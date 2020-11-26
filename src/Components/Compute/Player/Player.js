@@ -172,5 +172,27 @@ export default class Player {
     return;
   }
 
+  countHouses = () => {
+    let houses = 0;
+    this.properties.forEach((property) => {
+      const { houseCount } = property;
+      if (houseCount < 5) {
+        houses += houseCount;
+      }
+    });
+    return houses;
+  };
+
+  countHotels = () => {
+    let hotels = 0;
+    this.properties.forEach((property) => {
+      const { houseCount } = property;
+      if (houseCount >= 5) {
+        hotels += 1;
+      }
+    });
+    return hotels;
+  };
+
   declareBankruptcy() {}
 }

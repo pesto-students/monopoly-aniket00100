@@ -2,13 +2,16 @@ import React from 'react';
 import BoardEl from '../../UI/BoardEl/BoardEl';
 
 import blocks from '../../../data/gameBlocks.json';
-// import communityCards from '../../../data/communityCards.json';
-// import chanceCards from '../../../data/chanceCards.json';
+
 import Player from '../Player/Player';
 import Dice from '../Dice/Dice';
 import Auction from '../AuctionBlock/Auction';
 import PlayerStats from '../PlayerStats/PlayerStats';
 import Trade from '../Trade/Trade';
+import {
+  chanceCardHandler,
+  communityCardHandler,
+} from '../CardHandler/CardHandler';
 
 const btnStyle = {
   margin: 'auto',
@@ -50,6 +53,7 @@ class Board extends React.Component {
       auctionOn: false,
       disableEndTurn: false,
       tradeOn: false,
+      chanceCommunityText: '',
     };
   }
 
@@ -81,7 +85,8 @@ class Board extends React.Component {
 
     const [first, second] = this.dice.rollDice();
 
-    currentPlayer.currentPosition += first + second;
+    // currentPlayer.currentPosition += first + second;
+    currentPlayer.currentPosition += 30;
     if (currentPlayer.currentPosition >= 40) {
       currentPlayer.creditSalary(200);
     }
@@ -105,23 +110,72 @@ class Board extends React.Component {
       currentPlayer
     );
     if (first !== second) {
-      return this.setState({
+      return this.setState(
+        {
+          gameBlocks,
+          currentPlayerPlayed: true,
+          disableBuyButton,
+          disableAuction,
+        },
+        () => {
+          this.jailOrCardCheck();
+        }
+      );
+    }
+    return this.setState(
+      {
         gameBlocks,
-        currentPlayerPlayed: true,
+        currentPlayerPlayed: false,
         disableBuyButton,
         disableAuction,
-      });
+      },
+      () => {
+        this.jailOrCardCheck();
+      }
+    );
+  };
+
+  jailOrCardCheck = () => {
+    const [currentPlayer] = this.turn;
+    const { currentPosition } = currentPlayer;
+    const onCommunity = this.communityBlocks.indexOf(currentPosition);
+    const onChance = this.chanceBlocks.indexOf(currentPosition);
+    if (onChance !== -1) {
+      const chanceCommunityText = chanceCardHandler(this.turn, this.gameBlocks);
+      console.log(chanceCommunityText);
+      return this.setState({ chanceCommunityText });
     }
-    return this.setState({
-      gameBlocks,
-      currentPlayerPlayed: false,
-      disableBuyButton,
-      disableAuction,
-    });
+    if (onCommunity !== -1) {
+      const chanceCommunityText = communityCardHandler(
+        this.turn,
+        this.gameBlocks
+      );
+      return this.setState({ chanceCommunityText });
+    }
+    // pay tax
+    if (currentPosition === 4 || currentPosition === 38) {
+      const tax =
+        currentPosition === 4
+          ? this.gameBlocks[4].price
+          : this.gameBlocks[38].price;
+      currentPlayer.cash -= tax;
+      const chanceCommunityText =
+        tax > 100 ? 'Pay City Tax $200' : 'Pay Luxury Tax $100';
+      return this.setState({ chanceCommunityText });
+    }
+    if (currentPosition === 30) {
+      const [index] = this.gameBlocks[currentPosition].currentPlayers;
+      this.gameBlocks[currentPosition].currentPlayers.splice(index, 1);
+      currentPlayer.currentPosition = 10;
+      this.gameBlocks[currentPlayer.currentPosition].currentPlayers.push(
+        currentPlayer
+      );
+      this.onTriggerSetState();
+    }
   };
 
   buyProperty = () => {
-    const currentPlayer = this.turn[0];
+    const [currentPlayer] = this.turn;
     const { currentPosition } = currentPlayer;
     const disableBuyButton = true;
     const disableAuction = true;
@@ -171,6 +225,7 @@ class Board extends React.Component {
       disableBuyButton: true,
       disableAuction: true,
       tradeOn: false,
+      chanceCommunityText: '',
     });
   };
 
@@ -191,8 +246,10 @@ class Board extends React.Component {
       auctionOn,
       disableEndTurn,
       tradeOn,
+      chanceCommunityText,
     } = this.state;
     const [currentPlayer] = players;
+    const block = gameBlocks[currentPlayer.currentPosition];
     const tradeComponent = tradeOn ? (
       <Trade
         currentPlayer={currentPlayer}
@@ -213,7 +270,9 @@ class Board extends React.Component {
             </button>
             <button
               onClick={this.buyProperty}
-              disabled={forcedBid || disableBuyButton || auctionOn}
+              disabled={
+                forcedBid || disableBuyButton || auctionOn || block.owner
+              }
             >
               Buy Property
             </button>
@@ -232,6 +291,7 @@ class Board extends React.Component {
             <h1>{currentPlayer.name}</h1>
             <p>{`Cash: $${currentPlayer.getCurrentCash()}`}</p>
           </div>
+          <h4>{chanceCommunityText}</h4>
           <Auction
             auctionOn={auctionOn}
             biddingSequence={[...players]}

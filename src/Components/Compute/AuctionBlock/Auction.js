@@ -30,7 +30,7 @@ export default class Auction extends React.Component {
       return this.setState({ highestBid, biddingSequence, winningPlayer });
     }
     biddingSequence = [...biddingSequence.slice(1), biddingSequence[0]];
-    return this.setState({ biddingSequence });
+    this.setState({ biddingSequence });
   };
 
   onEndAuction = () => {
