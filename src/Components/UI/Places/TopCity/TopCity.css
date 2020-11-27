@@ -42,7 +42,7 @@
   text-transform: uppercase;
   margin: auto;
   font-size: 0.8rem;
-  transform: rotate(180deg);
+  /* transform: rotate(180deg); */
 }
 
 .top-city-houses {

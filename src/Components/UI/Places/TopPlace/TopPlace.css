@@ -16,5 +16,13 @@
   text-transform: uppercase;
   margin: auto;
   font-size: 0.8rem;
-  transform: rotate(180deg);
+  margin-top: 10px;
+  /* transform: rotate(180deg); */
+}
+
+.top-chance-image {
+  width: 70px;
+  height: 90px;
+  margin-top: 10px;
+  /* transform: rotate(180deg); */
 }

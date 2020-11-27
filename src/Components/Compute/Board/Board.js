@@ -41,10 +41,22 @@ class Board extends React.Component {
 
     this.setNewProperties();
 
-    this.player1 = new Player(props.playerOne, 'crimson', 1500);
-    this.player2 = new Player(props.playerTwo, 'black', 1500);
-    this.player3 = new Player(props.playerThree, 'green', 1500);
-    this.player4 = new Player(props.playerFour, 'purple', 1500);
+    this.player1 = new Player(
+      props.playerOne,
+      'crimson',
+      props.startingCapital
+    );
+    this.player2 = new Player(props.playerTwo, 'black', props.startingCapital);
+    this.player3 = new Player(
+      props.playerThree,
+      'green',
+      props.startingCapital
+    );
+    this.player4 = new Player(
+      props.playerFour,
+      'purple',
+      props.startingCapital
+    );
 
     this.turn = [this.player1, this.player2, this.player3, this.player4];
     this.gameBlocks[0].currentPlayers = [...this.turn];
@@ -99,7 +111,7 @@ class Board extends React.Component {
     const [first, second] = this.dice.rollDice();
 
     currentPlayer.currentPosition += first + second;
-    // currentPlayer.currentPosition += 30;
+    // currentPlayer.currentPosition = 20;
     if (currentPlayer.currentPosition >= 40) {
       currentPlayer.creditSalary(200);
     }

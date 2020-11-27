@@ -100,6 +100,7 @@ export default class Player {
     const { price } = property;
     this.cash += Math.round(price / 2);
     this.mortgagedProperties.push(property);
+    console.log(this.mortgagedProperties);
     return;
   }
 

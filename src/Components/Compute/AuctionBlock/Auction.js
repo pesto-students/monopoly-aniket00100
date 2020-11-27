@@ -5,11 +5,14 @@ import AuctionBlock from '../../UI/AuctionBlock/AuctionBlock';
 export default class Auction extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.initialState = {
       biddingSequence: props.biddingSequence,
       highestBid: null,
       winningPlayer: null,
       currentBid: null,
+    };
+    this.state = {
+      ...this.initialState,
     };
   }
 

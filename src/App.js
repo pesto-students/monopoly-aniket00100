@@ -38,6 +38,12 @@ class App extends React.Component {
     this.setState({ gameOn: true });
   };
 
+  onStartingCapitalChange = (event) => {
+    console.log('capital changed!');
+    const { value } = event.target;
+    this.setState({ startingCapital: Number(value) });
+  };
+
   render() {
     const {
       playerOne,
@@ -45,6 +51,7 @@ class App extends React.Component {
       playerThree,
       playerFour,
       gameOn,
+      startingCapital,
     } = this.state;
     const boardComponent = gameOn ? (
       <Board
@@ -52,6 +59,7 @@ class App extends React.Component {
         playerTwo={playerTwo}
         playerThree={playerThree}
         playerFour={playerFour}
+        startingCapital={startingCapital}
       ></Board>
     ) : null;
     const startGame = !gameOn ? (
@@ -65,6 +73,8 @@ class App extends React.Component {
         onPlayerThreeChange={this.onPlayerThreeChange}
         onPlayerTwoChange={this.onPlayerTwoChange}
         onStartGame={this.onStartGame}
+        startingCapital={startingCapital}
+        onStartingCapitalChange={this.onStartingCapitalChange}
       ></StartGame>
     ) : null;
     return (

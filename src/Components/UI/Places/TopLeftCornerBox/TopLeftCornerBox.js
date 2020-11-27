@@ -16,7 +16,7 @@ export default function TopLeftCornerBox({ blockDetails }) {
       <div className="tlc-player-position">
         <div className="d-flex">{playerBoxes}</div>
       </div>
-      <div>Parking!</div>
+      <div style={{ fontSize: '2rem' }}>Parking!</div>
     </div>
   );
 }

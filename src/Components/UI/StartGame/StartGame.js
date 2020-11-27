@@ -12,6 +12,8 @@ export default function StartGame(props) {
     onPlayerThreeChange,
     onPlayerFourChange,
     onStartGame,
+    startingCapital,
+    onStartingCapitalChange,
   } = props;
   return (
     <div className="start-game-div">
@@ -57,6 +59,15 @@ export default function StartGame(props) {
               className="form-control"
               value={playerFour}
               onChange={onPlayerFourChange}
+            ></input>
+          </div>
+          <div className="input-group input-group-lg player-input ">
+            <span className="input-group-text">Starting Capital</span>
+            <input
+              type="number"
+              className="form-control"
+              value={startingCapital}
+              onChange={onStartingCapitalChange}
             ></input>
           </div>
         </div>
