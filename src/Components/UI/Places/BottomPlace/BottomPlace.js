@@ -1,8 +1,8 @@
 import React from 'react';
-import communityIcon from '../../../../assets/community_chest_icon.png';
-import chanceIcon from '../../../../assets/chance_icon.png';
+// import communityIcon from '../../../../assets/community_chest_icon.png';
+// import chanceIcon from '../../../../assets/chance_icon.png';
 import trainIcon from '../../../../assets/train_icon.png';
-import taxIcon from '../../../../assets/tax_icon.png';
+// import taxIcon from '../../../../assets/tax_icon.png';
 
 import './BottomPlace.css';
 
