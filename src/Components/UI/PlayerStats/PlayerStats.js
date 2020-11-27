@@ -5,7 +5,7 @@ import './PlayerStats.css';
 export default function PlayerStats(props) {
   const { player, onBuild, onMortgage, onRedeem, onSellHouse } = props;
   const { properties, mortgagedProperties, propertyGroups } = player;
-
+  console.log(player);
   const propertiesList = properties.map((property) => {
     const { name, index, groupNumber, houseCount } = property;
     const { max, properties, maxHouses, allOnSameHouseLevel } = propertyGroups[

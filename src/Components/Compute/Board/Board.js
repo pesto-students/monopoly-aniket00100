@@ -12,13 +12,27 @@ import {
   chanceCardHandler,
   communityCardHandler,
 } from '../CardHandler/CardHandler';
+import ChanceText from '../../UI/ChanceText/ChanceText';
+import RollDiceComponent from '../../UI/RollDice/RollDice';
 
-const btnStyle = {
+const divStyle = {
   margin: 'auto',
   fontSize: '2rem',
   marginTop: '50px',
   marginBottom: '50px',
 };
+
+const btnStyle = {
+  margin: '20px',
+  fontSize: '2rem',
+  padding: '15px 20px 15px 20px',
+  // height: '3rem',
+};
+
+const COMMUNITY_BLOCKS = [2, 17, 33];
+const CHANCE_BLOCKS = [7, 22, 36];
+// const TAX_BLOCKS = [4, 38];
+const CANT_BUY_BLOCKS = [0, 2, 4, 7, 10, 17, 20, 22, 30, 33, 36, 38];
 
 class Board extends React.Component {
   constructor(props) {
@@ -27,14 +41,10 @@ class Board extends React.Component {
 
     this.setNewProperties();
 
-    this.communityBlocks = [2, 17, 33];
-    this.chanceBlocks = [7, 22, 36];
-    this.taxBlocks = [4, 38];
-
-    this.player1 = new Player('Shaktiman', 'crimson', 1500);
-    this.player2 = new Player('Kilvish', 'black', 1500);
-    this.player3 = new Player('Dr Strange', 'green', 1500);
-    this.player4 = new Player('Thanos', 'purple', 10);
+    this.player1 = new Player(props.playerOne, 'crimson', 1500);
+    this.player2 = new Player(props.playerTwo, 'black', 1500);
+    this.player3 = new Player(props.playerThree, 'green', 1500);
+    this.player4 = new Player(props.playerFour, 'purple', 1500);
 
     this.turn = [this.player1, this.player2, this.player3, this.player4];
     this.gameBlocks[0].currentPlayers = [...this.turn];
@@ -54,6 +64,9 @@ class Board extends React.Component {
       disableEndTurn: false,
       tradeOn: false,
       chanceCommunityText: '',
+      diceRolled: false,
+      diceFirst: null,
+      diceSecond: null,
     };
   }
 
@@ -121,6 +134,8 @@ class Board extends React.Component {
           disableBuyButton,
           disableAuction,
           forcedBid,
+          diceFirst: first,
+          diceSecond: second,
         },
         () => {
           this.jailOrCardCheck();
@@ -134,6 +149,8 @@ class Board extends React.Component {
         disableBuyButton,
         disableAuction,
         forcedBid,
+        diceFirst: first,
+        diceSecond: second,
       },
       () => {
         this.jailOrCardCheck();
@@ -144,8 +161,8 @@ class Board extends React.Component {
   jailOrCardCheck = () => {
     const [currentPlayer] = this.turn;
     const { currentPosition } = currentPlayer;
-    const onCommunity = this.communityBlocks.indexOf(currentPosition);
-    const onChance = this.chanceBlocks.indexOf(currentPosition);
+    const onCommunity = COMMUNITY_BLOCKS.indexOf(currentPosition);
+    const onChance = CHANCE_BLOCKS.indexOf(currentPosition);
     if (onChance !== -1) {
       const chanceCommunityText = chanceCardHandler(this.turn, this.gameBlocks);
       console.log(chanceCommunityText);
@@ -233,6 +250,8 @@ class Board extends React.Component {
       disableAuction: true,
       tradeOn: false,
       chanceCommunityText: '',
+      diceFirst: null,
+      diceSecond: null,
     });
   };
 
@@ -254,6 +273,8 @@ class Board extends React.Component {
       disableAuction: true,
       tradeOn: false,
       chanceCommunityText: '',
+      diceFirst: null,
+      diceSecond: null,
     });
   };
 
@@ -275,10 +296,20 @@ class Board extends React.Component {
       disableEndTurn,
       tradeOn,
       chanceCommunityText,
+      diceFirst,
+      diceSecond,
     } = this.state;
 
     const [currentPlayer] = players;
     const block = gameBlocks[currentPlayer.currentPosition];
+
+    let buyButtonHandleCantNonBuyBlocks = false;
+    const { index } = block;
+    if (CANT_BUY_BLOCKS.indexOf(index) !== -1) {
+      console.log('cant buy block!');
+      buyButtonHandleCantNonBuyBlocks = true;
+    }
+
     const tradeComponent = tradeOn ? (
       <Trade
         currentPlayer={currentPlayer}
@@ -286,44 +317,78 @@ class Board extends React.Component {
         onTriggerSetState={this.onTriggerSetState}
       ></Trade>
     ) : null;
+
+    const chanceCommunityComponent = chanceCommunityText.length ? (
+      <ChanceText chanceCommunityText={chanceCommunityText}></ChanceText>
+    ) : null;
+
     return (
       <div className="d-flex">
         <BoardEl gameBlocks={gameBlocks} gameOn={gameOn}></BoardEl>
-        <div style={btnStyle}>
+        <div style={divStyle}>
           <div>
+            <RollDiceComponent
+              first={diceFirst}
+              second={diceSecond}
+            ></RollDiceComponent>
             <button
+              className="btn btn-dark"
+              style={btnStyle}
               onClick={this.rollDice}
               disabled={currentPlayerPlayed || auctionOn}
             >
               Roll Dice
             </button>
             <button
+              className="btn btn-dark"
+              style={btnStyle}
               onClick={this.buyProperty}
               disabled={
-                forcedBid || disableBuyButton || auctionOn || block.owner
+                forcedBid ||
+                disableBuyButton ||
+                auctionOn ||
+                block.owner ||
+                buyButtonHandleCantNonBuyBlocks
               }
             >
               Buy Property
             </button>
-            <button onClick={this.onAuction} disabled={disableAuction}>
+            <button
+              className="btn btn-dark"
+              style={btnStyle}
+              onClick={this.onAuction}
+              disabled={disableAuction || buyButtonHandleCantNonBuyBlocks}
+            >
               Auction
             </button>
-            <button onClick={this.onTrade}>Trade</button>
             <button
+              className="btn btn-dark"
+              style={btnStyle}
+              onClick={this.onTrade}
+            >
+              Trade
+            </button>
+            <button
+              className="btn btn-dark"
+              style={btnStyle}
               onClick={this.endTurn}
               disabled={forcedBid || disableEndTurn}
             >
               End Turn
             </button>
-            <button onClick={this.onDeclareBankruptcy}>
+            <button
+              className="btn btn-dark"
+              style={btnStyle}
+              onClick={this.onDeclareBankruptcy}
+            >
               Declare Bankruptcy
             </button>
           </div>
-          <div style={btnStyle}>
+          <div style={divStyle}>
             <h1>{currentPlayer.name}</h1>
             <p>{`Cash: $${currentPlayer.getCurrentCash()}`}</p>
           </div>
-          <h4>{chanceCommunityText}</h4>
+          {chanceCommunityComponent}
           <Auction
             auctionOn={auctionOn}
             biddingSequence={[...players]}

@@ -1,0 +1,15 @@
+.div-card {
+  max-width: 1000px;
+  margin: auto;
+  margin-bottom: 50px;
+  overflow-wrap: normal;
+  border: 1px solid darkgray;
+}
+
+.div-card h2 {
+  padding-top: 10px;
+}
+
+.div-card h3 {
+  padding: 20px;
+}
