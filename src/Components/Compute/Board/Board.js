@@ -318,7 +318,6 @@ class Board extends React.Component {
     let buyButtonHandleCantNonBuyBlocks = false;
     const { index } = block;
     if (CANT_BUY_BLOCKS.indexOf(index) !== -1) {
-      console.log('cant buy block!');
       buyButtonHandleCantNonBuyBlocks = true;
     }
 

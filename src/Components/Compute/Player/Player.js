@@ -100,7 +100,8 @@ export default class Player {
     const { price } = property;
     this.cash += Math.round(price / 2);
     this.mortgagedProperties.push(property);
-    console.log(this.mortgagedProperties);
+    property.mortgaged = true;
+    console.log(property);
     return;
   }
 
@@ -111,6 +112,7 @@ export default class Player {
     const cost = Math.round((price / 2) * 1.1);
     console.log('mortgage redeem cost = ', cost);
     this.cash -= cost;
+    property.mortgaged = false;
     return;
   }
 

@@ -6,7 +6,7 @@ export default function PlayerStats(props) {
   const { player, onBuild, onMortgage, onRedeem, onSellHouse } = props;
   const { properties, mortgagedProperties, propertyGroups } = player;
   const propertiesList = properties.map((property) => {
-    const { name, index, groupNumber, houseCount } = property;
+    const { name, index, groupNumber, houseCount, mortgaged } = property;
     const { max, properties, maxHouses, allOnSameHouseLevel } = propertyGroups[
       groupNumber
     ];
@@ -28,11 +28,16 @@ export default function PlayerStats(props) {
 
     return (
       <div key={name} className="d-flex cell">
-        <p className="property-title mr-auto">{name}</p>
+        <p
+          className="property-title mr-auto"
+          style={{ textDecoration: mortgaged ? 'line-through' : null }}
+        >
+          {name}
+        </p>
         <button
           className="mtg-btn"
           onClick={(event) => onMortgage(event, index)}
-          disabled={mortgageDisabled}
+          disabled={mortgageDisabled || mortgaged}
         >
           Mortgage
         </button>
