@@ -1,15 +1,19 @@
 .div-card {
-  max-width: 1000px;
+  max-width: 500px;
   margin: auto;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   overflow-wrap: normal;
   border: 1px solid darkgray;
 }
 
-.div-card h2 {
+.div-card h5 {
   padding-top: 10px;
 }
 
-.div-card h3 {
-  padding: 20px;
+.div-card p {
+  margin-bottom: 0;
+}
+
+.card-header {
+  padding: 0px;
 }

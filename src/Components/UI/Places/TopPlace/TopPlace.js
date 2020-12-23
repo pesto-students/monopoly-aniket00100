@@ -46,18 +46,19 @@ export default function TopPlace({ blockDetails }) {
   }
 
   return (
-    <div className="top-place">
+    <div className="place">
       <div
-        className="player-top-color"
+        className="top-owner"
         style={{ backgroundColor: owner ? owner.color : 'transparent' }}
       ></div>
+
       <div className="player-top-position">
         <div className="d-flex">{playerBoxes}</div>
       </div>
       <div className="top-place-image">
         {chanceImage || trainImage || waterWorksImage}
       </div>
-      <div className="top-place-name">{name}</div>
+      <div className="top-name">{name}</div>
     </div>
   );
 }

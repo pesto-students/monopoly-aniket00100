@@ -1,28 +1,20 @@
 .top-place {
-  min-width: 111px;
-  height: 204px;
-  border: 2px solid black;
+  height: 100%;
+  width: 100%;
+  background-color: aquamarine;
 }
 
 .top-place-image {
-  height: 100px;
-  margin-top: 10px;
-}
-
-.top-place-name {
-  width: 80px;
-  height: 40px;
-  overflow-wrap: break-word;
-  text-transform: uppercase;
-  margin: auto;
-  font-size: 0.8rem;
-  margin-top: 10px;
-  /* transform: rotate(180deg); */
+  height: 50%;
 }
 
 .top-chance-image {
-  width: 70px;
-  height: 90px;
-  margin-top: 10px;
-  /* transform: rotate(180deg); */
+  width: 40%;
+  height: 80%;
+}
+
+.top-positions {
+  height: 15%;
+  margin-top: 2px;
+  font-size: 5px;
 }

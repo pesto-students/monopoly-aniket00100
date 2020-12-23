@@ -1,17 +1,34 @@
-.board {
-  /* height: 1348px; */
-  width: 1404px;
-  /* border: 2px solid black; */
-  background-color: #cde6d0;
-}
-
-.main-div {
-  margin-bottom: 20px;
+.grid-container {
+  display: grid;
+  width: 60vw;
+  height: 96vh;
   margin-left: 20px;
+  grid-template-columns: 1.5fr repeat(9, 1fr) 1.5fr;
+  grid-template-rows: 1.5fr repeat(9, 1fr) 1.5fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    '. . . . . . . . . . .'
+    '. Arena Arena Arena Arena Arena Arena Arena Arena Arena .'
+    '. Arena Arena Arena Arena Arena Arena Arena Arena Arena .'
+    '. Arena Arena Arena Arena Arena Arena Arena Arena Arena .'
+    '. Arena Arena Arena Arena Arena Arena Arena Arena Arena .'
+    '. Arena Arena Arena Arena Arena Arena Arena Arena Arena .'
+    '. Arena Arena Arena Arena Arena Arena Arena Arena Arena .'
+    '. Arena Arena Arena Arena Arena Arena Arena Arena Arena .'
+    '. Arena Arena Arena Arena Arena Arena Arena Arena Arena .'
+    '. Arena Arena Arena Arena Arena Arena Arena Arena Arena .'
+    '. . . . . . . . . . .';
 }
 
-.corner-box {
-  width: 204px;
-  height: 204px;
-  border: 2px solid black;
+.Arena {
+  grid-area: Arena;
+}
+
+.grid-container > div {
+  border: 1px solid rgb(47, 47, 47);
+}
+
+.game-controls {
+  max-height: 97vh;
+  overflow-y: auto;
 }

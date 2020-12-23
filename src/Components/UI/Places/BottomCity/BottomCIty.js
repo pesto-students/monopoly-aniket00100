@@ -17,19 +17,12 @@ export default function BottomCity({ blockDetails }) {
   });
 
   return (
-    <div className="bottom-city">
-      <div
-        className="bottom-city-box mb-auto"
-        style={{ backgroundColor: color }}
-      ></div>
-      <div className="bottom-city-content">
-        <p>{name}</p>
-        <div className="bottom-city-construction">
-          <p>{houseCount ? houseCount : null}</p>
-        </div>
-        <div className="player-position-bottom">
-          <div className="d-flex">{playerBoxes}</div>
-        </div>
+    <div className="bottom">
+      <div className="bottom-city-box" style={{ backgroundColor: color }}></div>
+      <div className="bottom-name">{name}</div>
+      <div className="bottom-city-houses">{houseCount ? houseCount : null}</div>
+      <div className="player-position-bottom">
+        <div className="d-flex">{playerBoxes}</div>
       </div>
       <div
         className="player-bottom-color"

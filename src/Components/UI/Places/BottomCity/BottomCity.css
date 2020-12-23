@@ -1,48 +1,41 @@
 .bottom-city-box {
-  height: 40px;
-  width: 100%;
-  border-bottom: 2px solid black;
+  height: 18%;
+  border-bottom: 1px solid black;
 }
 
-.bottom-city {
-  min-width: 111px;
-  height: 204px;
-  border: 2px solid black;
+.bottom {
+  height: 100%;
+  width: 100%;
 }
 
 .player-bottom-color {
-  height: 12px;
-  border-top: 2px dashed black;
+  height: 6%;
+  border-top: 1px dashed gray;
 }
 
-.bottom-city-content {
-  height: 148px;
-}
-
-.bottom-city-content p {
-  max-width: 90px;
-  margin: auto;
+.bottom-name {
+  height: 30%;
   overflow-wrap: break-word;
-  height: 74px;
-  font-size: 0.9rem;
   text-transform: uppercase;
-  padding-top: 5px;
+  margin: auto;
+  font-size: 10px;
+  font-weight: 600;
 }
 
-.bottom-city-construction {
-  height: 45px;
+.bottom-city-houses {
+  height: 30%;
 }
 
 .player-box-bottom-city {
-  height: 20px;
-  width: 20px;
+  height: 12px;
+  width: 12px;
   margin: 2px;
-  background-color: royalblue;
 }
 
 .player-position-bottom {
+  height: 15%;
   margin: auto;
-  max-width: 100px;
+  max-width: 100%;
 }
 
 .player-position-bottom .p-box {

@@ -15,9 +15,11 @@ export default function RollDiceComponent({ first, second }) {
   const imgSrcSecond = getDieSrc(second);
   return (
     <div className="dice-div">
-      <div className="d-flex">
-        <img className="dice-image" src={imgSrcFirst} alt="first die" />
-        <img className="dice-image" src={imgSrcSecond} alt="second die" />
+      <div className="dice-container">
+        <div className="d-flex">
+          <img className="dice-image" src={imgSrcFirst} alt="first die" />
+          <img className="dice-image" src={imgSrcSecond} alt="second die" />
+        </div>
       </div>
     </div>
   );

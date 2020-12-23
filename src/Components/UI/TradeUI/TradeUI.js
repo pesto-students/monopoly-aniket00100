@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './TradeUI.css';
+
 export default function TradeUI(props) {
   const {
     mainParty,
@@ -17,8 +19,6 @@ export default function TradeUI(props) {
   } = props;
 
   const mainPartyProperties = [...mainParty.properties];
-  // console.log('sssssssssssssss');
-  // console.log(mainPartyProperties);
   const counterPartyProperties = [];
   if (counterParty) {
     counterPartyProperties.push(...counterParty.properties);
@@ -63,17 +63,24 @@ export default function TradeUI(props) {
         <p>Trading with</p>
         <div className="tables">
           <p className="tables-title">{counterParty.name}</p>
-          <hr />
           {counterPartyProperties.length ? counterPartyPropertyList : null}
-          <div className="d-flex">
+          <div className="input-group">
+            <span className="input-group-text" id="basic-addon1">
+              Ask Cash
+            </span>
             <input
-              placeholder="Ask Money"
+              type="text"
+              className="form-control"
               value={cashAsked}
               onChange={onAskMoneyChanged}
-            ></input>
-            {/* <button className="ml-auto">Ask</button> */}
+            />
           </div>
-          <button onClick={onApproveCounterParty}>Approve Trade</button>
+          <button
+            className="btn btn-dark btn-approve-trade"
+            onClick={onApproveCounterParty}
+          >
+            Approve Trade
+          </button>
         </div>
       </div>
     );
@@ -86,7 +93,11 @@ export default function TradeUI(props) {
             name="players"
             id="players-trade-list"
             onChange={onValueChange}
+            defaultValue="default"
           >
+            <option value="default" disabled>
+              Select Player
+            </option>
             {render()}
           </select>
         </div>
@@ -95,27 +106,34 @@ export default function TradeUI(props) {
   }
 
   return (
-    <div>
-      <h1>Trade Block</h1>
-      <div className="d-flex">
-        <div>
+    <div className="tradebox-container">
+      <h5>Trade Block</h5>
+      <div className="tradebox">
+        <div className="player-tradebox">
           <p>Current Player</p>
           <div className="tables">
             <p className="tables-title">{mainParty.name}</p>
-            <hr />
             {mainPartyProperties.length ? mainPartyPropertyList : null}
-            <div className="d-flex">
+            <div className="input-group">
+              <span className="input-group-text" id="basic-addon1">
+                Send Cash
+              </span>
               <input
-                placeholder="Send Money"
+                type="text"
+                className="form-control"
                 onChange={onSendMoneyChange}
                 value={cashToSend}
-              ></input>
-              {/* <button className="ml-auto">Send</button> */}
+              />
             </div>
-            <button onClick={onApproveMainParty}>Approve Trade</button>
+            <button
+              className="btn btn-dark btn-approve-trade"
+              onClick={onApproveMainParty}
+            >
+              Approve Trade
+            </button>
           </div>
         </div>
-        <div>{counterPartyElement}</div>
+        <div className="player-tradebox">{counterPartyElement}</div>
       </div>
     </div>
   );

@@ -18,7 +18,6 @@ export default function StartGame(props) {
   return (
     <div className="start-game-div">
       <h1 className="game-title">MONOPOLY</h1>
-      <br></br>
       <h2>A multiplayer game of wit, business accumen and a bit of luck!</h2>
       <br></br>
       <br></br>

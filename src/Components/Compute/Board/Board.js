@@ -17,15 +17,15 @@ import RollDiceComponent from '../../UI/RollDice/RollDice';
 
 const divStyle = {
   margin: 'auto',
-  fontSize: '2rem',
-  marginTop: '50px',
-  marginBottom: '50px',
+  fontSize: '1rem',
+  marginTop: '20px',
+  marginBottom: '20px',
 };
 
 const btnStyle = {
-  margin: '20px',
-  fontSize: '2rem',
-  padding: '15px 20px 15px 20px',
+  margin: '10px',
+  fontSize: '1rem',
+  padding: '5px 10px 5px 10px',
   // height: '3rem',
 };
 
@@ -336,7 +336,7 @@ class Board extends React.Component {
     return (
       <div className="d-flex">
         <BoardEl gameBlocks={gameBlocks} gameOn={gameOn}></BoardEl>
-        <div style={divStyle}>
+        <div style={divStyle} className="game-controls">
           <div>
             <RollDiceComponent
               first={diceFirst}
@@ -394,10 +394,6 @@ class Board extends React.Component {
             >
               Declare Bankruptcy
             </button>
-          </div>
-          <div style={divStyle}>
-            <h1>{currentPlayer.name}</h1>
-            <p>{`Cash: $${currentPlayer.getCurrentCash()}`}</p>
           </div>
           {chanceCommunityComponent}
           <Auction

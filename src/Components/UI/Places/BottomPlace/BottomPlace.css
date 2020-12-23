@@ -1,34 +1,19 @@
-.bottom-place {
-  min-width: 111px;
-  height: 204px;
-  border: 2px solid black;
-}
-
 .player-bottom-place-color {
-  height: 12px;
-  border-top: 2px dashed gray;
+  height: 6%;
+  border-top: 1px dashed gray;
+  /* background-color: blue; */
 }
 
 .bottom-place-content {
   height: 183px;
 }
 
-.bottom-place-content p {
-  max-width: 90px;
-  margin: auto;
-  overflow-wrap: break-word;
-  height: 40px;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  margin-top: 5px;
-}
-
 .bottom-place-image {
-  height: 114px;
+  height: 48%;
 }
 
 .bottom-chance-image {
-  width: 70px;
-  height: 90px;
-  margin-top: 10px;
+  margin-top: 5px;
+  width: 40%;
+  height: 80%;
 }

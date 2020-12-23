@@ -72,18 +72,20 @@ export default function PlayerStats(props) {
   });
   return (
     <div>
-      <h1>Player Stats</h1>
-      <h3>{player.name}</h3>
-      <div className="d-flex">
+      <h5>{`Now playing: ${player.name}`}</h5>
+      <p>{`Cash: $${player.getCurrentCash()}`}</p>
+      <div className="tables-container">
         <div className="tables">
           <p className="tables-title">Owned Properties</p>
-          <hr />
-          {properties.length ? propertiesList : null}
+          <div className="table-content">
+            {properties.length ? propertiesList : null}
+          </div>
         </div>
         <div className="tables">
           <p className="tables-title">Mortgaged Properties</p>
-          <hr />
-          {mortgagedProperties.length ? mortgagedPropertyList : null}
+          <div className="table-content">
+            {mortgagedProperties.length ? mortgagedPropertyList : null}
+          </div>
         </div>
       </div>
     </div>

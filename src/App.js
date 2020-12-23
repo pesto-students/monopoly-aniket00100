@@ -8,8 +8,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       gameOn: false,
-      playerOne: 'Shaktiman',
-      playerTwo: 'Kilvish',
+      playerOne: 'Batman',
+      playerTwo: 'Joker',
       playerThree: 'Dr. Strange',
       playerFour: 'Thanos',
       startingCapital: 1500,
