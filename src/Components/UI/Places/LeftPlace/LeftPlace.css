@@ -21,7 +21,7 @@
 
 .left-place-title {
   width: 100%;
-  height: 40%;
+  height: 30%;
   font-size: 10px;
   font-weight: 600;
   overflow-wrap: break-word;
@@ -29,7 +29,7 @@
 }
 
 .left-place-image {
-  height: 32%;
+  height: 45%;
 }
 
 .p-box-container {
@@ -37,8 +37,8 @@
 }
 
 .left-image {
-  height: 30%;
-  width: 30%;
+  height: 50%;
+  width: 40%;
 }
 
 .left-player-positions {

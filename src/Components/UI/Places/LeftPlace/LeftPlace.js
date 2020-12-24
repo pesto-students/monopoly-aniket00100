@@ -1,18 +1,13 @@
 import React from 'react';
 import communityChestIcon from '../../../../assets/community_chest_icon.png';
 import electricIcon from '../../../../assets/electric_icon.png';
+import trainIcon from '../../../../assets/train_icon.png';
 
 import './LeftPlace.css';
 
 export default function LeftPlace({ blockDetails }) {
-  const { name, currentPlayers, owner, index } = blockDetails;
-  const cp = [
-    { name: 'a', color: 'green' },
-    { name: 'a', color: 'green' },
-    { name: 'a', color: 'green' },
-    { name: 'a', color: 'green' },
-  ];
-  const playerBoxes = cp.map((player) => {
+  const { name, currentPlayers, owner, index, price } = blockDetails;
+  const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;
     return (
       <div className="p-box-container">
@@ -25,24 +20,17 @@ export default function LeftPlace({ blockDetails }) {
     );
   });
 
-  let communityIconSrc;
-  let communityImage = null;
-  if (index === 17) {
-    communityImage = (
-      <img
-        src={communityChestIcon}
-        alt="Community chest"
-        className="left-image"
-      />
-    );
-  }
+  const text = index === 17 ? name : `${name} $${price}`;
 
   return (
     <div className="left-property-container">
       <div className="d-flex left-property">
-        <div className="left-owner"></div>
+        <div
+          className="left-owner"
+          style={{ backgroundColor: owner ? owner.color : 'transparent' }}
+        ></div>
         <div className="left-place-content">
-          <div className="left-place-title">{name}</div>
+          <div className="left-place-title">{text}</div>
           <div className="left-place-image"></div>
           <div className="left-player-positions">
             <div className="d-flex">{playerBoxes}</div>

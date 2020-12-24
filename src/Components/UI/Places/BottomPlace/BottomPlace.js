@@ -7,7 +7,7 @@ import taxIcon from '../../../../assets/tax_icon.png';
 import './BottomPlace.css';
 
 export default function TopPlace({ blockDetails }) {
-  const { name, currentPlayers, owner, index } = blockDetails;
+  const { name, currentPlayers, owner, index, price } = blockDetails;
   // const cp = [
   //   { name: 'a', color: 'red' },
   //   { name: 'a', color: 'red' },
@@ -78,9 +78,11 @@ export default function TopPlace({ blockDetails }) {
     );
   }
 
+  const text = index === 4 || index === 5 ? `${name} $${price}` : name;
+
   return (
     <div className="bottom">
-      <div className="bottom-name">{name}</div>
+      <div className="bottom-name">{text}</div>
       <div className="bottom-place-image">
         {trainImage || taxImage || communityImage || chanceImage}
       </div>

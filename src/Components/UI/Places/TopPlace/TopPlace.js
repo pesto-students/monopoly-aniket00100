@@ -5,7 +5,7 @@ import waterWorksIcon from '../../../../assets/water_icon.png';
 import './TopPlace.css';
 
 export default function TopPlace({ blockDetails }) {
-  const { name, currentPlayers, owner, index } = blockDetails;
+  const { name, currentPlayers, owner, index, price } = blockDetails;
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;
     return (
@@ -45,6 +45,8 @@ export default function TopPlace({ blockDetails }) {
     );
   }
 
+  const text = index === 22 ? name : `${name} $${price}`;
+
   return (
     <div className="place">
       <div
@@ -58,7 +60,7 @@ export default function TopPlace({ blockDetails }) {
       <div className="top-place-image">
         {chanceImage || trainImage || waterWorksImage}
       </div>
-      <div className="top-name">{name}</div>
+      <div className="top-name">{text}</div>
     </div>
   );
 }

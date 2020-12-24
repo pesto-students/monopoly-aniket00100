@@ -47,30 +47,60 @@ export default function BoardComponent(props) {
         <TopCity blockDetails={gameBlocks[29]} />
       </div>
       <div className="property-card">30</div>
-      <div className="property-card">19</div>
-      <div className="property-card">31</div>
-      <div className="property-card">18</div>
-      <div className="property-card">32</div>
+      <div className="property-card">
+        <LeftCity blockDetails={gameBlocks[19]} />
+      </div>
+      <div className="property-card">
+        <RightCity blockDetails={gameBlocks[31]} />
+      </div>
+      <div className="property-card">
+        <LeftCity blockDetails={gameBlocks[18]} />
+      </div>
+      <div className="property-card">
+        <RightCity blockDetails={gameBlocks[32]} />
+      </div>
       <div className="property-card">
         <LeftPlace blockDetails={gameBlocks[17]} />
       </div>
-      <div className="property-card">33</div>
-      <div className="property-card">16</div>
-      <div className="property-card">34</div>
+      <div className="property-card">
+        <RightPlace blockDetails={gameBlocks[33]} />
+      </div>
+      <div className="property-card">
+        <LeftCity blockDetails={gameBlocks[16]} />
+      </div>
+      <div className="property-card">
+        <RightCity blockDetails={gameBlocks[34]} />
+      </div>
       <div className="property-card">
         <LeftPlace blockDetails={gameBlocks[15]} />
       </div>
-      <div className="property-card">35</div>
-      <div className="property-card">14</div>
-      <div className="property-card">36</div>
-      <div className="property-card">13</div>
-      <div className="property-card">37</div>
+      <div className="property-card">
+        <RightPlace blockDetails={gameBlocks[35]} />
+      </div>
+      <div className="property-card">
+        <LeftCity blockDetails={gameBlocks[14]} />
+      </div>
+      <div className="property-card">
+        <RightPlace blockDetails={gameBlocks[36]} />
+      </div>
+      <div className="property-card">
+        <LeftCity blockDetails={gameBlocks[13]} />
+      </div>
+      <div className="property-card">
+        <RightCity blockDetails={gameBlocks[37]} />
+      </div>
       <div className="property-card">
         <LeftPlace blockDetails={gameBlocks[12]} />
       </div>
-      <div className="property-card">38</div>
-      <div className="property-card">11</div>
-      <div className="property-card">39</div>
+      <div className="property-card">
+        <RightPlace blockDetails={gameBlocks[38]} />
+      </div>
+      <div className="property-card">
+        <LeftCity blockDetails={gameBlocks[11]} />
+      </div>
+      <div className="property-card">
+        <RightCity blockDetails={gameBlocks[39]} />
+      </div>
       <div className="property-card">10</div>
       <div className="property-card">
         <BottomCity blockDetails={gameBlocks[9]} />

@@ -3,32 +3,44 @@ import React from 'react';
 import './LeftCity.css';
 
 export default function LeftCity({ blockDetails }) {
-  const { color, name, currentPlayers, owner, houseCount } = blockDetails;
+  const {
+    color,
+    name,
+    currentPlayers,
+    owner,
+    houseCount,
+    price,
+  } = blockDetails;
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;
     return (
-      <div
-        className="p-box"
-        key={name}
-        style={{ backgroundColor: color }}
-      ></div>
+      <div className="p-box-container">
+        <div
+          className="p-box"
+          key={name}
+          style={{ backgroundColor: color }}
+        ></div>
+      </div>
     );
   });
   return (
-    <div className="horizontal-place mr-auto">
-      <div className="d-flex">
+    <div className="left-property-container">
+      <div className="d-flex left-property">
         <div
-          className="player-left-color"
+          className="left-owner"
           style={{ backgroundColor: owner ? owner.color : 'transparent' }}
         ></div>
-        <div className="player-left-position">
-          <div className="p-boxes">{playerBoxes}</div>
+        <div className="left-city-content">
+          <div className="left-place-title">{`${name} $${price}`}</div>
+          <div className="left-place-image"></div>
+          <div className="left-player-positions">
+            <div className="d-flex">{playerBoxes}</div>
+          </div>
         </div>
-        <div className="left-city-houses">
-          <p>{houseCount ? houseCount : null}</p>
-        </div>
-        <div className="left-city-name">{name}</div>
-        <div className="left-city" style={{ backgroundColor: color }}></div>
+        <div
+          className="left-city-color"
+          style={{ backgroundColor: color }}
+        ></div>
       </div>
     </div>
   );
