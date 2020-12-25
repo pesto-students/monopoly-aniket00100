@@ -1,4 +1,6 @@
 import React from 'react';
+import { Tooltip } from 'react-tippy';
+import TooltipContent from '../TooltipContent/TooltipContent';
 
 import './RightCity.css';
 
@@ -25,26 +27,31 @@ export default function RightCity({ blockDetails }) {
     );
   });
   return (
-    <div className="left-property-container">
-      <div className="d-flex left-property">
-        <div
-          className="right-city-color"
-          style={{ backgroundColor: color }}
-        ></div>
-        <div className="left-city-content">
-          <div className="right-place-title">{`${name} $${price}`}</div>
-          <div className="right-place-price"></div>
-          <div className="left-player-positions">
-            <div className="d-flex">{playerBoxes}</div>
+    <Tooltip
+      html={<TooltipContent blockDetails={blockDetails} />}
+      position="top-start"
+    >
+      <div className="left-property-container">
+        <div className="d-flex left-property">
+          <div
+            className="right-city-color"
+            style={{ backgroundColor: color }}
+          ></div>
+          <div className="left-city-content">
+            <div className="right-place-title">{`${name} $${price}`}</div>
+            <div className="right-place-price"></div>
+            <div className="left-player-positions">
+              <div className="d-flex">{playerBoxes}</div>
+            </div>
           </div>
-        </div>
 
-        <div
-          className="right-owner"
-          style={{ backgroundColor: owner ? owner.color : 'transparent' }}
-        ></div>
+          <div
+            className="right-owner"
+            style={{ backgroundColor: owner ? owner.color : 'transparent' }}
+          ></div>
+        </div>
       </div>
-    </div>
+    </Tooltip>
   );
 }
 

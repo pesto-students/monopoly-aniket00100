@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { Tooltip } from 'react-tippy';
+import TooltipContent from '../TooltipContent/TooltipContent';
 import './LeftCity.css';
 
 export default function LeftCity({ blockDetails }) {
@@ -10,38 +11,41 @@ export default function LeftCity({ blockDetails }) {
     owner,
     houseCount,
     price,
+    mortgaged,
   } = blockDetails;
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;
     return (
-      <div className="p-box-container">
-        <div
-          className="p-box"
-          key={name}
-          style={{ backgroundColor: color }}
-        ></div>
+      <div key={name} className="p-box-container">
+        <div className="p-box" style={{ backgroundColor: color }}></div>
       </div>
     );
   });
+
   return (
-    <div className="left-property-container">
-      <div className="d-flex left-property">
-        <div
-          className="left-owner"
-          style={{ backgroundColor: owner ? owner.color : 'transparent' }}
-        ></div>
-        <div className="left-city-content">
-          <div className="left-place-title">{`${name} $${price}`}</div>
-          <div className="left-place-image"></div>
-          <div className="left-player-positions">
-            <div className="d-flex">{playerBoxes}</div>
+    <Tooltip
+      html={<TooltipContent blockDetails={blockDetails} />}
+      position="top-start"
+    >
+      <div className="left-property-container">
+        <div className="d-flex left-property">
+          <div
+            className="left-owner"
+            style={{ backgroundColor: owner ? owner.color : 'transparent' }}
+          ></div>
+          <div className="left-city-content">
+            <div className="left-place-title">{`${name} $${price}`}</div>
+            <div className="left-place-image"></div>
+            <div className="left-player-positions">
+              <div className="d-flex">{playerBoxes}</div>
+            </div>
           </div>
+          <div
+            className="left-city-color"
+            style={{ backgroundColor: color }}
+          ></div>
         </div>
-        <div
-          className="left-city-color"
-          style={{ backgroundColor: color }}
-        ></div>
       </div>
-    </div>
+    </Tooltip>
   );
 }
