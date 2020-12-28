@@ -11,7 +11,9 @@ export default class Auction extends React.Component {
       winningPlayer: null,
       currentBid: null,
     };
-    this.state = { ...this.initialState };
+    this.state = {
+      ...this.initialState,
+    };
   }
 
   componentDidUpdate(prevProps) {
@@ -30,17 +32,17 @@ export default class Auction extends React.Component {
       return this.setState({ highestBid, biddingSequence, winningPlayer });
     }
     biddingSequence = [...biddingSequence.slice(1), biddingSequence[0]];
-    return this.setState({ biddingSequence });
+    this.setState({ biddingSequence });
   };
 
   onEndAuction = () => {
-    const { winningPlayer } = this.state;
+    const { winningPlayer, highestBid } = this.state;
     this.setState({ ...this.initialState }, () => {
-      this.props.onEndAuction(winningPlayer);
+      this.props.onEndAuction(winningPlayer, highestBid);
     });
   };
 
-  onInputChange = (event, player) => {
+  onInputChange = (event) => {
     const { value } = event.target;
     this.setState({ currentBid: Number(value) });
   };

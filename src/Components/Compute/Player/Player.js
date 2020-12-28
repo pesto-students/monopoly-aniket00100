@@ -73,6 +73,15 @@ export default class Player {
     };
   }
 
+  auctionBuyProperty(block, cost) {
+    this.properties.push(block);
+    const { groupNumber } = block;
+    this.cash -= cost;
+    const propertyGroup = this.propertyGroups[groupNumber];
+    propertyGroup.properties.push(block);
+    return;
+  }
+
   buyProperty(block) {
     this.properties.push(block);
     const { price, groupNumber } = block;
@@ -86,13 +95,13 @@ export default class Player {
     return this.cash;
   }
 
-  tradeProperty(getProperty, giveProperty = null, extraCash = 0) {}
-
   mortgageProperty(property) {
     console.log(property);
     const { price } = property;
     this.cash += Math.round(price / 2);
     this.mortgagedProperties.push(property);
+    property.mortgaged = true;
+    console.log(property);
     return;
   }
 
@@ -103,11 +112,11 @@ export default class Player {
     const cost = Math.round((price / 2) * 1.1);
     console.log('mortgage redeem cost = ', cost);
     this.cash -= cost;
+    property.mortgaged = false;
     return;
   }
 
-  buildOnProperty(groupNumber) {
-    console.log('Player js..');
+  handleConstructionOnProperty(groupNumber) {
     const propertyGroup = this.propertyGroups[groupNumber];
     let { properties } = propertyGroup;
     properties.forEach((property) => {
@@ -115,7 +124,6 @@ export default class Player {
       if (houseCount >= propertyGroup.maxHouses) {
         propertyGroup.maxHouses = houseCount;
         propertyGroup.maxHouses = Math.min(propertyGroup.maxHouses, 5);
-        console.log(propertyGroup.maxHouses);
       }
     });
     let newHouseLevel = true;
@@ -136,9 +144,7 @@ export default class Player {
   }
 
   creditSalary(salary) {
-    console.log('before salary = ', this.cash);
     this.cash += salary;
-    console.log('after salary = ', this.cash);
     return;
   }
 
@@ -150,5 +156,61 @@ export default class Player {
     return rent;
   }
 
-  declareBankruptcy() {}
+  trade(
+    counterParty,
+    propertiesToSend,
+    propertiesToAsk,
+    cashToSend,
+    cashAsked
+  ) {
+    const mainPartyProperties = this.properties;
+    const counterPartyProperties = counterParty.properties;
+    propertiesToSend.forEach((property) => {
+      const index = mainPartyProperties.indexOf(property);
+      mainPartyProperties.splice(index, 1);
+      counterPartyProperties.push(property);
+      property.owner = counterParty;
+    });
+    propertiesToAsk.forEach((property) => {
+      const index = counterPartyProperties.indexOf(property);
+      counterPartyProperties.splice(index, 1);
+      mainPartyProperties.push(property);
+      property.owner = this;
+    });
+    this.cash -= Number(cashToSend);
+    counterParty.cash += Number(cashToSend);
+    counterParty.cash -= Number(cashAsked);
+    this.cash += Number(cashAsked);
+    return;
+  }
+
+  countHouses = () => {
+    let houses = 0;
+    this.properties.forEach((property) => {
+      const { houseCount } = property;
+      if (houseCount < 5) {
+        houses += houseCount;
+      }
+    });
+    return houses;
+  };
+
+  countHotels = () => {
+    let hotels = 0;
+    this.properties.forEach((property) => {
+      const { houseCount } = property;
+      if (houseCount >= 5) {
+        hotels += 1;
+      }
+    });
+    return hotels;
+  };
+
+  declareBankruptcy() {
+    this.properties.forEach((property) => {
+      property.owner = null;
+      property.houseCount = 0;
+      property.mortgaged = false;
+    });
+  }
 }

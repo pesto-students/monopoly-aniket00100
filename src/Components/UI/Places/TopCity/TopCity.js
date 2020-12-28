@@ -1,9 +1,18 @@
 import React from 'react';
+import { Tooltip } from 'react-tippy';
+import TooltipContent from '../TooltipContent/TooltipContent';
 
 import './TopCity.css';
 
 export default function TopCity({ blockDetails }) {
-  const { color, name, currentPlayers, owner, houseCount } = blockDetails;
+  const {
+    color,
+    name,
+    currentPlayers,
+    owner,
+    houseCount,
+    price,
+  } = blockDetails;
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;
     return (
@@ -14,21 +23,24 @@ export default function TopCity({ blockDetails }) {
   });
 
   return (
-    <div className="place">
-      <div
-        className="player-top-color"
-        style={{ backgroundColor: owner ? owner.color : 'transparent' }}
-      ></div>
-      <div className="top-city-content">
+    <Tooltip
+      html={<TooltipContent blockDetails={blockDetails} />}
+      position="left-end"
+    >
+      <div className="place">
+        <div
+          className="top-owner"
+          style={{ backgroundColor: owner ? owner.color : 'transparent' }}
+        ></div>
+
         <div className="player-top-position">
           <div className="d-flex">{playerBoxes}</div>
         </div>
-        <div className="top-city-houses">
-          <p>{houseCount ? houseCount : null}</p>
-        </div>
-        <div className="top-city-name">{name}</div>
+        <div className="top-city-houses">{houseCount ? houseCount : null}</div>
+        <div className="top-name">{`${name} $${price}`}</div>
+
+        <div className="top-city" style={{ backgroundColor: color }}></div>
       </div>
-      <div className="top-city" style={{ backgroundColor: color }}></div>
-    </div>
+    </Tooltip>
   );
 }

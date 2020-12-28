@@ -17,7 +17,7 @@ export default function TopRightCornerBox({ blockDetails }) {
       <div className="tlc-player-position">
         <div className="d-flex">{playerBoxes}</div>
       </div>
-      <div>Go to Jail!</div>
+      <div style={{ fontSize: '2rem' }}>Go to Jail!</div>
     </div>
   );
 }

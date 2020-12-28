@@ -1,0 +1,17 @@
+.dice-image {
+  /* margin-right: 10px; */
+  max-height: 50px;
+  max-width: 50px;
+  margin: auto;
+}
+
+.dice-div {
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.dice-container {
+  max-width: 150px;
+  margin: auto;
+}

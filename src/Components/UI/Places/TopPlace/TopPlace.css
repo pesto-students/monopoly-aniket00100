@@ -1,20 +1,20 @@
 .top-place {
-  min-width: 111px;
-  height: 204px;
-  border: 2px solid black;
+  height: 100%;
+  width: 100%;
+  background-color: aquamarine;
 }
 
 .top-place-image {
-  height: 100px;
-  margin-top: 10px;
+  height: 50%;
 }
 
-.top-place-name {
-  width: 80px;
-  height: 40px;
-  overflow-wrap: break-word;
-  text-transform: uppercase;
-  margin: auto;
-  font-size: 0.8rem;
-  transform: rotate(180deg);
+.top-chance-image {
+  width: 40%;
+  height: 80%;
+}
+
+.top-positions {
+  height: 15%;
+  margin-top: 2px;
+  font-size: 5px;
 }

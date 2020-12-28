@@ -3,27 +3,34 @@ import React from 'react';
 import './RightPlace.css';
 
 export default function RightPlace({ blockDetails }) {
-  const { name, currentPlayers, owner } = blockDetails;
+  const { name, currentPlayers, owner, price, index } = blockDetails;
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;
     return (
-      <div
-        className="p-box"
-        key={name}
-        style={{ backgroundColor: color }}
-      ></div>
+      <div className="p-box-container">
+        <div
+          className="p-box"
+          key={name}
+          style={{ backgroundColor: color }}
+        ></div>
+      </div>
     );
   });
+
+  const text = index === 33 || index === 36 ? name : `${name} $${price}`;
+
   return (
-    <div className="right-place">
-      <div className="d-flex">
-        <div className="right-place-name">{name}</div>
-        <div className="right-place-image"></div>
-        <div className="player-right-position">
-          <div className="p-boxes">{playerBoxes}</div>
+    <div className="left-property-container">
+      <div className="d-flex left-property">
+        <div className="right-place-content">
+          <div className="right-place-title">{text}</div>
+          <div className="left-place-image"></div>
+          <div className="left-player-positions">
+            <div className="d-flex">{playerBoxes}</div>
+          </div>
         </div>
         <div
-          className="ml-auto player-right-place-color"
+          className="right-owner"
           style={{ backgroundColor: owner ? owner.color : 'transparent' }}
         ></div>
       </div>

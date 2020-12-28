@@ -20,7 +20,18 @@ export default class PlayerStats extends React.Component {
     const block = gameBlocks[propertyIndex];
     block.houseCount += 1;
     block.houseCount = Math.min(block.houseCount, 5);
-    currentPlayer.buildOnProperty(block.groupNumber);
+    currentPlayer.handleConstructionOnProperty(block.groupNumber);
+    this.setState({ gameBlocks }, () => {
+      this.props.onTriggerSetState();
+    });
+  };
+
+  onSellHouse = (_, propertyIndex) => {
+    const { gameBlocks, currentPlayer } = this.state;
+    const block = gameBlocks[propertyIndex];
+    block.houseCount -= 1;
+    block.houseCount = Math.max(block.houseCount, 0);
+    currentPlayer.handleConstructionOnProperty(block.groupNumber);
     this.setState({ gameBlocks }, () => {
       this.props.onTriggerSetState();
     });
@@ -50,6 +61,7 @@ export default class PlayerStats extends React.Component {
         onBuild={this.onBuild}
         onMortgage={this.onMortgage}
         onRedeem={this.onRedeem}
+        onSellHouse={this.onSellHouse}
       ></PlayerStatsUI>
     );
   }
