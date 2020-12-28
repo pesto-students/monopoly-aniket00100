@@ -13,6 +13,7 @@ import BotLeftCornerBox from '../Places/BotLeftCornerBox/BotLeftCornerBox';
 import BotRightCornerBox from '../Places/BotRightCornerBox/BotRightCornerBox';
 
 import './BoardEl.css';
+import PlayersMoney from '../PlayersMoney/PlayersMoney';
 
 export default function BoardComponent(props) {
   const { gameBlocks } = props;
@@ -130,7 +131,12 @@ export default function BoardComponent(props) {
         <BottomCity blockDetails={gameBlocks[1]} />
       </div>
       <div className="property-card">0</div>
-      <div className="Arena">Arena</div>
+      <div className="Arena">
+        <div>
+          <PlayersMoney />
+        </div>
+        <div>Game Log</div>
+      </div>
     </div>
   );
 }

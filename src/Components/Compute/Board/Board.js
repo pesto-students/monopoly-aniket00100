@@ -26,12 +26,10 @@ const btnStyle = {
   margin: '10px',
   fontSize: '1rem',
   padding: '5px 10px 5px 10px',
-  // height: '3rem',
 };
 
 const COMMUNITY_BLOCKS = [2, 17, 33];
 const CHANCE_BLOCKS = [7, 22, 36];
-// const TAX_BLOCKS = [4, 38];
 const CANT_BUY_BLOCKS = [0, 2, 4, 7, 10, 17, 20, 22, 30, 33, 36, 38];
 
 class Board extends React.Component {
@@ -315,10 +313,10 @@ class Board extends React.Component {
     const [currentPlayer] = players;
     const block = gameBlocks[currentPlayer.currentPosition];
 
-    let buyButtonHandleCantNonBuyBlocks = false;
+    let cannotBuyPropertyBlock = false;
     const { index } = block;
     if (CANT_BUY_BLOCKS.indexOf(index) !== -1) {
-      buyButtonHandleCantNonBuyBlocks = true;
+      cannotBuyPropertyBlock = true;
     }
 
     const tradeComponent = tradeOn ? (
@@ -359,7 +357,7 @@ class Board extends React.Component {
                 disableBuyButton ||
                 auctionOn ||
                 block.owner ||
-                buyButtonHandleCantNonBuyBlocks
+                cannotBuyPropertyBlock
               }
             >
               Buy Property
@@ -368,7 +366,7 @@ class Board extends React.Component {
               className="btn btn-dark"
               style={btnStyle}
               onClick={this.onAuction}
-              disabled={disableAuction || buyButtonHandleCantNonBuyBlocks}
+              disabled={disableAuction || cannotBuyPropertyBlock}
             >
               Auction
             </button>

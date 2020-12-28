@@ -13,17 +13,20 @@ export default function AuctionBlock(props) {
   } = props;
   return (
     <div className="auction-block">
-      <h1>Auction Block!</h1>
-      <h3>{`It's ${player.name}'s turn..!`}</h3>
-      <h3>{`Bid to beat: $${highestBid ? highestBid : 0}`}</h3>
+      <h5>Auction Block</h5>
+      <p>{`It's ${player.name}'s turn..!`}</p>
+      <p className="strong">{`Bid to beat: $${highestBid ? highestBid : 0}`}</p>
       <input
         placeholder="Enter your bid"
         type="number"
         onChange={onInputChange}
       />
-      <button onClick={onBidSubmit}>Bid</button>
-      <button onClick={onGiveUp}>Give Up!</button>
-      <button onClick={onEndAuction}>End Auction!</button>
+      <button className="btn btn-dark" onClick={onBidSubmit}>
+        Bid
+      </button>
+      <button className="btn btn-dark" onClick={onGiveUp}>
+        Give Up!
+      </button>
     </div>
   );
 }
