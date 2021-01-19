@@ -333,7 +333,7 @@ class Board extends React.Component {
 
     return (
       <div className="d-flex">
-        <BoardEl gameBlocks={gameBlocks} gameOn={gameOn}></BoardEl>
+        <BoardEl gameBlocks={gameBlocks} players></BoardEl>
         <div style={divStyle} className="game-controls">
           <div>
             <RollDiceComponent

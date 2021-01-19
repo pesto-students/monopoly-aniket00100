@@ -9,7 +9,7 @@ import './RollDice.css';
 
 export default function RollDiceComponent({ first, second }) {
   if (!first) {
-    return null;
+    return <div className="dice-placeholder"></div>;
   }
   const imgSrcFirst = getDieSrc(first);
   const imgSrcSecond = getDieSrc(second);
