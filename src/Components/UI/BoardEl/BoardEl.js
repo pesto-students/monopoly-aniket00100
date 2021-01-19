@@ -7,10 +7,10 @@ import TopPlace from '../Places/TopPlace/TopPlace';
 import BottomPlace from '../Places/BottomPlace/BottomPlace';
 import LeftPlace from '../Places/LeftPlace/LeftPlace';
 import RightPlace from '../Places/RightPlace/RightPlace';
-import TopLeftCornerBox from '../Places/TopLeftCornerBox/TopLeftCornerBox';
-import TopRightCornerBox from '../Places/TopRightCornerBox/TopRightCornerBox';
-import BotLeftCornerBox from '../Places/BotLeftCornerBox/BotLeftCornerBox';
-import BotRightCornerBox from '../Places/BotRightCornerBox/BotRightCornerBox';
+// import TopLeftCornerBox from '../Places/TopLeftCornerBox/TopLeftCornerBox';
+// import TopRightCornerBox from '../Places/TopRightCornerBox/TopRightCornerBox';
+// import BotLeftCornerBox from '../Places/BotLeftCornerBox/BotLeftCornerBox';
+// import BotRightCornerBox from '../Places/BotRightCornerBox/BotRightCornerBox';
 
 import './BoardEl.css';
 import PlayersMoney from '../PlayersMoney/PlayersMoney';

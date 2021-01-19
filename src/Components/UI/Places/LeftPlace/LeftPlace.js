@@ -1,7 +1,7 @@
 import React from 'react';
-import communityChestIcon from '../../../../assets/community_chest_icon.png';
-import electricIcon from '../../../../assets/electric_icon.png';
-import trainIcon from '../../../../assets/train_icon.png';
+// import communityChestIcon from '../../../../assets/community_chest_icon.png';
+// import electricIcon from '../../../../assets/electric_icon.png';
+// import trainIcon from '../../../../assets/train_icon.png';
 
 import './LeftPlace.css';
 

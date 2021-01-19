@@ -7,7 +7,7 @@ export default function AuctionBlock(props) {
     player,
     onInputChange,
     onBidSubmit,
-    onEndAuction,
+
     highestBid,
     onGiveUp,
   } = props;

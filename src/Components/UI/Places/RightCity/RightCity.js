@@ -5,14 +5,7 @@ import TooltipContent from '../TooltipContent/TooltipContent';
 import './RightCity.css';
 
 export default function RightCity({ blockDetails }) {
-  const {
-    color,
-    name,
-    currentPlayers,
-    owner,
-    houseCount,
-    price,
-  } = blockDetails;
+  const { color, name, currentPlayers, owner, price } = blockDetails;
 
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;

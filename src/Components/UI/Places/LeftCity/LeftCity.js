@@ -9,9 +9,8 @@ export default function LeftCity({ blockDetails }) {
     name,
     currentPlayers,
     owner,
-    houseCount,
+
     price,
-    mortgaged,
   } = blockDetails;
   const playerBoxes = currentPlayers.map((player) => {
     const { name, color } = player;

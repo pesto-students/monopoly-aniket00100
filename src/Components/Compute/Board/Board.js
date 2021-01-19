@@ -296,7 +296,6 @@ class Board extends React.Component {
   render() {
     const {
       players,
-      gameOn,
       gameBlocks,
       currentPlayerPlayed,
       forcedBid,
@@ -333,7 +332,7 @@ class Board extends React.Component {
 
     return (
       <div className="d-flex">
-        <BoardEl gameBlocks={gameBlocks} gameOn={gameOn}></BoardEl>
+        <BoardEl gameBlocks={gameBlocks} players></BoardEl>
         <div style={divStyle} className="game-controls">
           <div>
             <RollDiceComponent
