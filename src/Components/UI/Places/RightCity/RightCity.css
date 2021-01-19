@@ -1,0 +1,26 @@
+.right-owner {
+  height: 100%;
+  width: 6%;
+  border-left: 1px dashed gray;
+}
+
+.right-city-color {
+  height: 100%;
+  width: 16%;
+  border-right: 1px solid black;
+}
+
+.right-place-title {
+  width: 100%;
+  height: 30%;
+  font-size: 10px;
+  font-weight: 600;
+  overflow-wrap: break-word;
+  text-transform: uppercase;
+  padding-right: 3px;
+  padding-left: 3px;
+}
+
+.right-place-price {
+  height: 45%;
+}

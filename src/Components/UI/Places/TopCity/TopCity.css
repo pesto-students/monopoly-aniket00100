@@ -1,0 +1,44 @@
+.place {
+  height: 100%;
+  width: 100%;
+}
+
+.top-city {
+  height: 18%;
+  width: 100%;
+  /* background-color: red; */
+  border-top: 1px solid black;
+}
+
+.top-owner {
+  height: 6%;
+  border-bottom: 1px dashed gray;
+}
+
+.player-top-position .p-box {
+  height: 12px;
+  width: 12px;
+  background-color: royalblue;
+}
+
+.player-top-position {
+  margin-top: 2px;
+  height: 15%;
+}
+
+.p-box-div {
+  margin: auto;
+}
+
+.top-name {
+  height: 30%;
+  overflow-wrap: break-word;
+  text-transform: uppercase;
+  margin: auto;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.top-city-houses {
+  height: 30%;
+}

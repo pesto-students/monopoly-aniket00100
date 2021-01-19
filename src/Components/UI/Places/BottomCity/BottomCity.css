@@ -1,0 +1,43 @@
+.bottom-city-box {
+  height: 18%;
+  border-bottom: 1px solid black;
+}
+
+.bottom {
+  height: 100%;
+  width: 100%;
+}
+
+.player-bottom-color {
+  height: 6%;
+  border-top: 1px dashed gray;
+}
+
+.bottom-name {
+  height: 30%;
+  overflow-wrap: break-word;
+  text-transform: uppercase;
+  margin: auto;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.bottom-city-houses {
+  height: 30%;
+}
+
+.player-box-bottom-city {
+  height: 12px;
+  width: 12px;
+  margin: 2px;
+}
+
+.player-position-bottom {
+  height: 15%;
+  margin: auto;
+  max-width: 100%;
+}
+
+.player-position-bottom .p-box {
+  margin: auto;
+}

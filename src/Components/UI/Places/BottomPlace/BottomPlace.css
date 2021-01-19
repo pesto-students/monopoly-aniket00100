@@ -1,0 +1,19 @@
+.player-bottom-place-color {
+  height: 6%;
+  border-top: 1px dashed gray;
+  /* background-color: blue; */
+}
+
+.bottom-place-content {
+  height: 183px;
+}
+
+.bottom-place-image {
+  height: 48%;
+}
+
+.bottom-chance-image {
+  margin-top: 5px;
+  width: 40%;
+  height: 80%;
+}

@@ -1,0 +1,16 @@
+.player-tradebox {
+  max-width: 350px;
+}
+
+.tradebox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.btn-approve-trade {
+  width: 100%;
+}
+
+.tables select {
+  width: 100%;
+}

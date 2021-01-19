@@ -1,0 +1,21 @@
+.auction-block input {
+  font-size: 15px;
+  height: 40px;
+  padding-left: 10px;
+}
+
+.auction-block button {
+  font-size: 15px;
+  margin-left: 20px;
+}
+
+.auction-block {
+  margin: 20px auto;
+  width: 93%;
+  border: 2px dashed black;
+  padding: 25px;
+}
+
+.strong {
+  font-weight: 600;
+}

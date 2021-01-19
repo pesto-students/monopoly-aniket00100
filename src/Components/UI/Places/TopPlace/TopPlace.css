@@ -1,0 +1,20 @@
+.top-place {
+  height: 100%;
+  width: 100%;
+  background-color: aquamarine;
+}
+
+.top-place-image {
+  height: 50%;
+}
+
+.top-chance-image {
+  width: 40%;
+  height: 80%;
+}
+
+.top-positions {
+  height: 15%;
+  margin-top: 2px;
+  font-size: 5px;
+}

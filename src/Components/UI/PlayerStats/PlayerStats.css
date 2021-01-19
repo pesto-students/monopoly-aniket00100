@@ -1,0 +1,36 @@
+.tables {
+  margin: 20px;
+  border: 2px dashed black;
+  max-width: 100%;
+}
+
+.property-title {
+  margin-left: 10px;
+  margin-right: 10px;
+  /* text-align: left; */
+}
+
+.mtg-btn {
+  margin-right: 10px;
+  height: 30px;
+}
+
+.table-content {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.cell {
+  background-color: rgb(207, 204, 204);
+  /* max-width: 100%; */
+  padding-top: 10px;
+  padding-bottom: 0px;
+}
+
+.tables-title {
+  margin: 5px 0px 5px 0px;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
