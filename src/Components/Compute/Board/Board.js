@@ -296,7 +296,6 @@ class Board extends React.Component {
   render() {
     const {
       players,
-      gameOn,
       gameBlocks,
       currentPlayerPlayed,
       forcedBid,
